@@ -23,6 +23,15 @@ app.config(function($routeProvider,$httpProvider){
         }
      	});
 
+       $routeProvider
+       	.when('/clientes/listar', {
+       		templateUrl: 'views/clientes_listar.html',
+          controller: 'ClientesController',
+          access : {
+            requiresLogin: true
+          }
+       	});
+
       $routeProvider
       	.when('/user', {
       		templateUrl: 'views/admin.html',

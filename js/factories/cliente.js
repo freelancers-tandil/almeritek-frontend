@@ -12,6 +12,14 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
     });
   };
 
+  clienteFactory.getAllClientes = function(callback){
+    $http.get($rootScope.serverUrl + "/cliente/list").success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
   return clienteFactory;
 
 }]);

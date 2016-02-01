@@ -16,20 +16,20 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
         },
         { id : 'clientes',
           text : 'Clientes',
-          route : '/admin/clientes',
+          route : '/clientes',
           hasIcon : true,
           icon : 'fa-money',
           hasSubitems : true,
           subitems : [
             { id: 'agregar',
               text : 'Agregar',
-              route : '/admin/clientes/agregar',
+              route : '/clientes/agregar',
               hasIcon : true,
               icon : 'fa-plus'
             },
             { id : 'listar',
               text : 'Listar',
-              route : '/admin/clientes/listar',
+              route : '/clientes/listar',
               hasIcon : true,
               icon : 'fa-list'
             }
