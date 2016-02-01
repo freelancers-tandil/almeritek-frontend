@@ -21,6 +21,7 @@
             <tr>
               <th>Nombre / Empresa</th>
               <th>Mail</th>
+              <th>Identificacion</th>
               <th>Telefono</th>
               <th>Direccion</th>
               <th>Acciones</th>
@@ -28,10 +29,11 @@
             <tr ng-repeat="cliente in clientes | filter: search_data">
               <td>{{cliente.nombre + (cliente.apellido_1!==null ? ' ' + cliente.apellido_1 : '') + (cliente.apellido_2!==null ? ' ' + cliente.apellido_2 : '')}}</td>
               <td>{{cliente.email}}</td>
+              <td>{{cliente.identity_number}}</td>
               <td>{{cliente.telefono_1}}</td>
               <td>{{cliente.direccion_1}}</td>
               <td>
-                <div class="btn" href="" ng-click=""><span class="glyphicon glyphicon-pencil"></span></div>
+                <div class="btn" href="" ng-click="editarCliente(cliente)"><span class="glyphicon glyphicon-pencil"></span></div>
                 <div class="btn" href="" ng-click=""><span class="glyphicon glyphicon-trash"></span></div>
               </td>
             </tr>

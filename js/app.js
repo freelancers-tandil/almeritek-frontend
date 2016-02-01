@@ -41,6 +41,15 @@ app.config(function($routeProvider,$httpProvider){
     }
    });
 
+   $routeProvider
+    .when('/clientes/editar', {
+      templateUrl: 'views/clientes_agregar.html',
+     controller: 'ClientesController',
+     access : {
+       requiresLogin: true
+     }
+    });
+
   $routeProvider
   	.when('/user', {
   		templateUrl: 'views/admin.html',
@@ -64,7 +73,8 @@ app.config(function($routeProvider,$httpProvider){
 app.run(function($location,$rootScope,userFactory){
   $rootScope.serverUrl = 'http://localhost/almeritek-backend/index.php';
   $rootScope.isLogged=false;
-
+  $rootScope.successNotifications = [];
+  $rootScope.errorNotifications = [];
   $rootScope.loadComplete=false;
   $rootScope.$watch('loadComplete',function(){
     if ($rootScope.loadComplete){

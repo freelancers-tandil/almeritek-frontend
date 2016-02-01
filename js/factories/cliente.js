@@ -4,6 +4,10 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
 
   var clienteFactory = {};
 
+  clienteFactory.tipo_cliente = [];
+  clienteFactory.tipo_cliente[0] = 'EMPRESA';
+  clienteFactory.tipo_cliente[1] = 'PERSONA';
+
   clienteFactory.getCantidadClientes = function(callback){
     $http.get($rootScope.serverUrl + "/cliente/cantidad").success(function(data){
       callback(data.cantidad);
@@ -17,6 +21,14 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
       callback(data);
     }).error(function(data){
       callback([]);
+    });
+  };
+
+  clienteFactory.addCliente = function(cliente,success,error){
+    $http.post($rootScope.serverUrl+"/cliente","json="+JSON.stringify(cliente)).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
     });
   };
 
