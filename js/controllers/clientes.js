@@ -27,6 +27,10 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   };
 
   $scope.addCliente = function(){
+    if ($scope.es_empresa){
+      $scope.newClient.apellido_1=null;
+      $scope.newClient.apellido_2=null;
+    }
     clienteFactory.addCliente($scope.newClient,function(data){
       var index = $rootScope.successNotifications.push('Cliente agregado con exito.');
       $timeout(function(){
@@ -39,7 +43,41 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
         $rootScope.errorNotifications.splice(index-1,1);
       },5000,index);
     });
-    //$rootScope.successNotifications.push('Cliente agregado con exito.');
+  };
+
+  $scope.saveCliente = function(){
+    if ($scope.es_empresa){
+      $scope.newClient.apellido_1=null;
+      $scope.newClient.apellido_2=null;
+    }
+    clienteFactory.saveCliente($scope.newClient,function(data){
+      var index = $rootScope.successNotifications.push('Cliente guardado con exito.');
+      $timeout(function(){
+        $rootScope.successNotifications.splice(index,1);
+      },5000,index);
+      $scope.newClient = {};
+    },function(data){
+      var index = $rootScope.errorNotifications.push(data.error.message);
+      $timeout(function(){
+        $rootScope.errorNotifications.splice(index-1,1);
+      },5000,index);
+    });
+  };
+
+  $scope.deleteCliente = function(indice){
+    clienteFactory.deleteCliente($scope.clientes[indice],function(data){
+      $scope.clientes.splice(indice,1);
+      var index = $rootScope.successNotifications.push('Cliente eliminado con exito.');
+      $timeout(function(){
+        $rootScope.successNotifications.splice(index,1);
+      },5000,index);
+      $scope.newClient = {};
+    },function(data){
+      var index = $rootScope.errorNotifications.push(data.error.message);
+      $timeout(function(){
+        $rootScope.errorNotifications.splice(index-1,1);
+      },5000,index);
+    });
   };
 
   $scope.editarCliente = function(cliente){

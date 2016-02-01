@@ -32,6 +32,27 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
     });
   };
 
+  clienteFactory.saveCliente = function(cliente,success,error){
+    $http.put($rootScope.serverUrl+"/cliente","json="+JSON.stringify(cliente)).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
+
+  clienteFactory.deleteCliente = function(cliente,success,error){
+    //"json="+JSON.stringify(cliente)
+    $http({
+      method: 'DELETE',
+      url: $rootScope.serverUrl+"/cliente",
+      data: JSON.stringify(cliente)
+    }).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
+
   return clienteFactory;
 
 }]);
