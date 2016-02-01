@@ -6,6 +6,7 @@ app.controller('ClientesController',function($scope,clienteFactory){
   $scope.search_field_txt = 'Nombre:';
   $scope.search_field = 'nombre';
   $scope.search_data = '';
+  $scope.es_empresa = false;
 
   $scope.getAllClientes = function(){
     clienteFactory.getAllClientes(function(data){

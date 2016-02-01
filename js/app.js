@@ -6,49 +6,58 @@ var app = angular.module('app', ['ngRoute',
 
 app.config(function($routeProvider,$httpProvider){
 
-     $routeProvider
-     	.when('/login', {
-     		templateUrl: 'views/login.html',
-         access : {
-           requiresLogin: false
-         }
-     	});
+  $routeProvider
+  	.when('/login', {
+  		templateUrl: 'views/login.html',
+     access : {
+       requiresLogin: false
+     }
+  });
 
-     $routeProvider
-     	.when('/', {
-     		templateUrl: 'views/admin.html',
-        controller: 'DashboardController',
-        access : {
-          requiresLogin: true
-        }
-     	});
+  $routeProvider
+  	.when('/', {
+  		templateUrl: 'views/admin.html',
+    controller: 'DashboardController',
+    access : {
+      requiresLogin: true
+    }
+  });
 
-       $routeProvider
-       	.when('/clientes/listar', {
-       		templateUrl: 'views/clientes_listar.html',
-          controller: 'ClientesController',
-          access : {
-            requiresLogin: true
-          }
-       	});
+  $routeProvider
+  	.when('/clientes/listar', {
+  		templateUrl: 'views/clientes_listar.html',
+    controller: 'ClientesController',
+    access : {
+      requiresLogin: true
+    }
+  });
 
-      $routeProvider
-      	.when('/user', {
-      		templateUrl: 'views/admin.html',
-        access : {
-          requiresLogin: true,
-          requiredPermissions: ['TECH_ROLE'],
-          permissionType: 'AtLeastOne'
-        }
-      });
+  $routeProvider
+   .when('/clientes/agregar', {
+     templateUrl: 'views/clientes_agregar.html',
+    controller: 'ClientesController',
+    access : {
+      requiresLogin: true
+    }
+   });
 
-      $routeProvider
-      	.when('/unauthorized', {
-      		templateUrl: 'views/unauthorized.html',
-        access : {
-          requiresLogin: true
-        }
-      });
+  $routeProvider
+  	.when('/user', {
+  		templateUrl: 'views/admin.html',
+    access : {
+      requiresLogin: true,
+      requiredPermissions: ['TECH_ROLE'],
+      permissionType: 'AtLeastOne'
+    }
+  });
+
+  $routeProvider
+  	.when('/unauthorized', {
+  		templateUrl: 'views/unauthorized.html',
+    access : {
+      requiresLogin: true
+    }
+  });
 
 });
 
