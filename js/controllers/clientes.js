@@ -84,4 +84,10 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
     $rootScope.editClient = cliente;
     $location.path('/clientes/editar');
   };
+
+  $scope.crearTicketCliente = function(cliente){
+    $rootScope.newTicketClient = cliente;
+    $location.path('/tickets/agregar');
+
+  }
 });

@@ -1,0 +1,153 @@
+<div id="page-wrapper" class="container-fluid" ng-cloak>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Agregar ticket</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="alert alert-success alert-dismissible" role="alert" ng-repeat="success in $root.successNotifications">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="$root.successNotifications.splice($index,1)"><span aria-hidden="true">&times;</span></button>
+        <strong>Bien!</strong> {{success}}
+      </div>
+      <div class="alert alert-danger alert-dismissible" role="alert" ng-repeat="error in $root.errorNotifications">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="$root.errorNotifications.splice($index,1)"><span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong> {{error}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <form id="ticket-add">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Numero ticket:</span>
+              <input type="text" class="form-control" placeholder="Numero ticket" aria-describedby="basic-addon1" ng-model="newTicket.num_ticket"/>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Fecha:</span>
+              <input type="text" class="form-control" placeholder="dd-mm-yyyy" aria-describedby="basic-addon1" ng-model="newTicket.fecha"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Taller:</span>
+              <input type="text" class="form-control" placeholder="Taller" aria-describedby="basic-addon1" ng-model="newTicket.taller">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Equipo:</span>
+              <input type="text" class="form-control" placeholder="Equipo" aria-describedby="basic-addon1" ng-model="newTicket.equipo">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Equipo:</span>
+              <input type="text" class="form-control" placeholder="Equipo" aria-describedby="basic-addon1" ng-model="newTicket.equipo">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Modelo:</span>
+              <input type="text" class="form-control" placeholder="Modelo" aria-describedby="basic-addon1" ng-model="newTicket.modelo">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Marca:</span>
+              <input type="text" class="form-control" placeholder="Marca" aria-describedby="basic-addon1" ng-model="newTicket.marca">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Imei:</span>
+              <input type="text" class="form-control" placeholder="Imei" aria-describedby="basic-addon1" ng-model="newTicket.imei">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Cliente:</span>
+              <input type="text" class="form-control" placeholder="Cliente" aria-describedby="basic-addon1" ng-value="clienteForTicket.nombre + (clienteForTicket.apellido_1!==null ? ' ' + clienteForTicket.apellido_1 : '') + (clienteForTicket.apellido_2!==null ? ' ' + clienteForTicket.apellido_2 : '')" disabled>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Costo reparación:</span>
+              <input type="text" class="form-control" placeholder="00.00" aria-describedby="basic-addon1" ng-model="newTicket.costo_reparacion">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Usuario:</span>
+              <input type="text" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1" ng-model="newTicket.tecnico">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Avisado:</span>
+              <input type="text" class="form-control" placeholder="Avisado" aria-describedby="basic-addon1" ng-model="newTicket.avisado">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Estado:</span>
+              <input type="text" class="form-control" placeholder="Estado" aria-describedby="basic-addon1" ng-model="newTicket.estado">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Beneficio tecnico:</span>
+              <input type="text" class="form-control" placeholder="Beneficio tecnico" aria-describedby="basic-addon1" ng-model="newTicket.beneficio_tecnico">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Fecha cierre:</span>
+              <input type="text" class="form-control" placeholder="Fecha cierre" aria-describedby="basic-addon1" ng-model="newTicket.fecha_cierre">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Pedido:</span>
+              <input type="text" class="form-control" placeholder="Pedido" aria-describedby="basic-addon1" ng-model="newTicket.pedido">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Observaciones:</span>
+              <input type="text" class="form-control" placeholder="Observaciones" aria-describedby="basic-addon1" ng-model="newTicket.observaciones">
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-show="!editMode">
+          <div class="col-lg-12">
+            <button type="button" class="btn btn-success" ng-click="addTicket()">Agregar</button>
+          </div>
+        </div>
+        <div class="row" ng-show="editMode">
+          <div class="col-lg-12">
+            <button type="button" class="btn btn-success" ng-click="saveTicket()">Guardar</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

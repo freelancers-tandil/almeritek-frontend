@@ -6,21 +6,21 @@
                         <h3 class="panel-title">Iniciar Sesion</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" ng-submit="login();">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Usuario" name="user" type="text" value="" ng-model="username">
+                                    <input class="form-control" placeholder="Usuario" name="user" type="text" value="" ng-model="username" ng-keypress="($event.which === 13)?login():0">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" value="" ng-model="password">
+                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" value="" ng-model="password" ng-keypress="($event.which === 13)?login():0">
                                 </div>
                                 <div class="checkbox">
                                     <label ng-show="false">
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input name="remember" type="checkbox" value="Remember Me" ng-keypress="($event.which === 13)?login():0">Remember Me
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a class="btn btn-lg btn-success btn-block" ng-click="login();">Ingresar</a>
+                                <a class="btn btn-lg btn-success btn-block" ng-click="login();" >Ingresar</a>
                             </fieldset>
                         </form>
                     </div>

@@ -40,20 +40,20 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
         },
         { id : 'tickets',
           text : 'Tickets',
-          route : '/admin/tickets',
+          route : '/tickets',
           hasIcon : true,
           icon : 'fa-list-alt',
           hasSubitems : true,
           subitems : [
             { id : 'agregar',
               text : 'Agregar',
-              route : '/admin/tickets/agregar',
+              route : '/tickets/agregar',
               hasIcon : true,
               icon : 'fa-plus'
             },
             { id : 'listar',
               text : 'Listar',
-              route : '/admin/tickets/listar',
+              route : '/tickets/listar',
               hasIcon : true,
               icon : 'fa-list'
             }

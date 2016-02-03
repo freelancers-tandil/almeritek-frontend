@@ -68,6 +68,33 @@ app.config(function($routeProvider,$httpProvider){
     }
   });
 
+  $routeProvider
+    .when('/tickets/listar', {
+      templateUrl: 'views/tickets_listar.html',
+    controller: 'TicketsController',
+    access : {
+      requiresLogin: true
+    }
+  });
+
+  $routeProvider
+   .when('/tickets/agregar', {
+     templateUrl: 'views/tickets_agregar.html',
+    controller: 'TicketsController',
+    access : {
+      requiresLogin: true
+    }
+   });
+
+   $routeProvider
+    .when('/tickets/editar', {
+      templateUrl: 'views/tickets_agregar.html',
+     controller: 'TicketsController',
+     access : {
+       requiresLogin: true
+     }
+    });
+
 });
 
 app.run(function($location,$rootScope,userFactory){
