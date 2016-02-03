@@ -7,9 +7,21 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.search_field = 'nombre';
   $scope.search_data = '';
   $scope.es_empresa = false;
-  $scope.newTickets = {};
+  $scope.newTicket = {};
   $scope.editMode = false;
   $scope.clienteForTicket = $rootScope.newTicketClient;
+
+  if ($location.path()=='/tickets/editar'){
+    $scope.editMode = true;
+    if ($rootScope.editTicket!==undefined){
+      // $scope.newTicket.cliente = $scope.clienteForTicket.id;
+      $scope.newTicket=$rootScope.editTicket;
+      console.log($scope.editTicket);
+      console.log($rootScope.clienteForTicket);
+    } else {
+      $location.path('/');
+    }
+  }
 
   $scope.getAllTickets = function(){
     ticketFactory.getAllTickets(function(data){
@@ -18,6 +30,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   };
 
   $scope.addTicket = function(){
+    $scope.newTicket.cliente = $scope.clienteForTicket.id;
     ticketFactory.addTicket($scope.newTicket,function(data){
       var index = $rootScope.successNotifications.push('Ticket agregado con exito.');
       $timeout(function(){
@@ -33,6 +46,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   };
 
   $scope.saveTicket = function(){
+    $scope.newTicket.cliente = $scope.clienteForTicket.id;
     ticketFactory.saveTicket($scope.newTicket,function(data){
       var index = $rootScope.successNotifications.push('Ticket guardado con exito.');
       $timeout(function(){

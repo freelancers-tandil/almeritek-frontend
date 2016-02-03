@@ -45,7 +45,7 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
     $http({
       method: 'DELETE',
       url: $rootScope.serverUrl+"/ticket",
-      data: JSON.stringify(cliente)
+      data: JSON.stringify(ticket)
     }).success(function(data){
       success(data);
     }).error(function(data){

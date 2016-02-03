@@ -13,6 +13,7 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   if ($location.path()=='/clientes/editar'){
     $scope.editMode = true;
     if ($rootScope.editClient!==undefined){
+      $scope.newClient
       $scope.newClient=$rootScope.editClient;
       console.log($scope.editClient);
     } else {
