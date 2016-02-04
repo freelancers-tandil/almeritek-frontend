@@ -25,6 +25,17 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
 
   };
 
+  // $(function () {
+  //     $('#datetimepicker1').datetimepicker({
+  //       format : "YYYY-MM-DD HH:mm:ss"
+  //     });
+  //     $('#datetimepicker1 input').on("dp.change", function(){
+  //       $scope.newTicket.fecha=$('#datetimepicker1 input').val();
+  //       console.log($scope.newTicket.fecha);
+  //     });
+  //
+  // });
+
   $scope.getAllTickets = function(){
     ticketFactory.getAllTickets(function(data){
       $scope.tickets=data;

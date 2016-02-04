@@ -29,11 +29,13 @@
         </div>
         <div class="row">
           <div ng-class="{'col-lg-12':es_empresa,'col-lg-6':!es_empresa}">
-            <div class="input-group" ng-class="{'has-error':clientes.Nombre.$invalid && clientes.Nombre.$dirty}">
-              <span class="input-group-addon" id="basic-addon1">Nombre:</span>
-              <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-describedby="basic-addon1" ng-model="newClient.nombre" required="true"/>
-              <span ng-show="!cliente-add.$pristine && cliente-add.Nombre.$error.reuired">Name is required</span>
-              <!-- <label for="form-control" class = "error text-danger">Falta el nombre</label> -->
+            <div class="form-group">
+              <div class="input-group" ng-class="{'has-error': !clientes.$pristine && clientes.Nombre.$error.required}">
+                <span class="input-group-addon" id="basic-addon1">Nombre:</span>
+                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-describedby="basic-addon1" ng-model="newClient.nombre" required/>
+
+              </div>
+              <span ng-show="!clientes.$pristine && clientes.Nombre.$error.required">El campo es obligatorio.</span>
             </div>
           </div>
           <div class="col-lg-6" ng-show="!es_empresa">
@@ -53,10 +55,11 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="input-group">
+            <div class="input-group" ng-class="{'has-error': !clientes.$pristine && clientes.identificacion.$error.required}">
               <span class="input-group-addon" id="basic-addon1">{{es_empresa ? 'NIF/CIF' : 'DNI'}}:</span>
-              <input type="text" class="form-control" placeholder="{{es_empresa ? 'NIF/CIF' : 'DNI'}}" aria-describedby="basic-addon1" ng-model="newClient.identity_number">
+              <input type="text" name="identificacion" class="form-control" placeholder="{{es_empresa ? 'NIF/CIF' : 'DNI'}}" aria-describedby="basic-addon1" ng-model="newClient.identity_number" required>
             </div>
+            <span ng-show="!clientes.$pristine && clientes.identificacion.$error.required">El campo es obligatorio.</span>
           </div>
         </div>
         <div class="row">
@@ -83,7 +86,7 @@
         </div>
         <div class="row" ng-show="!editMode">
           <div class="col-lg-12">
-            <button type="button" class="btn btn-success" ng-click="addCliente()">Agregar</button>
+            <button type="button" class="btn btn-success" ng-click="addCliente()" ng-disabled="!clientes.$valid">Agregar</button>
           </div>
         </div>
         <div class="row" ng-show="editMode">

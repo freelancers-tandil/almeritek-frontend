@@ -1,7 +1,8 @@
 'use strict';
 var app = angular.module('app', ['ngRoute',
                                   'ngResource',
-                                  'ngMd5'
+                                  'ngMd5',
+                                  'ui.bootstrap'
                                         ]);
 
 app.config(function($routeProvider,$httpProvider){

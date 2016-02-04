@@ -17,19 +17,22 @@
     </div>
   </div>
   <div class="row">
-      <form id="ticket-add">
+      <form id="ticket-add" name="ticket">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="input-group">
+            <div class="input-group" ng-class="{'has-error': !ticket.$pristine && ticket.numTicket.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Numero ticket:</span>
-              <input type="text" class="form-control" placeholder="Numero ticket" aria-describedby="basic-addon1" ng-model="newTicket.num_ticket"/>
+              <input type="text" name="numTicket" class="form-control" placeholder="Numero ticket" aria-describedby="basic-addon1" ng-model="newTicket.num_ticket" required/>
             </div>
+            <span ng-show="!ticket.$pristine && ticket.numTicket.$error.required">El campo es obligatorio.</span>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="input-group">
+            <div class="input-group date" id= "datetimepicker1" ng-class="{'has-error': !ticket.$pristine && ticket.fecha.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Fecha:</span>
-              <input type="text" class="form-control" placeholder="yyyy-dd-mm" aria-describedby="basic-addon1" ng-model="newTicket.fecha"/>
+              <input type="text" name="fecha" class="form-control"  uib-datapicker-popup="{{'YYYY-MM-DD HH:mm:ss'}}" is-open="popup1.opened" placeholder="yyyy-dd-mm" aria-describedby="basic-addon1" ng-model="newTicket.fecha" requiered/>
+              <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
+
           </div>
         </div>
         <div class="row">
@@ -38,6 +41,7 @@
               <span class="input-group-addon" id="basic-addon1">Taller:</span>
               <input type="text" class="form-control" placeholder="Taller" aria-describedby="basic-addon1" ng-model="newTicket.taller">
             </div>
+            <!-- <span ng-show="!ticket.$pristine && ticket.fecha.$error.required">El campo es obligatorio.</span> -->
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group">
@@ -140,12 +144,12 @@
         </div>
         <div class="row" ng-show="!editMode">
           <div class="col-lg-12">
-            <button type="button" class="btn btn-success" ng-click="addTicket()">Agregar</button>
+            <button type="button" class="btn btn-success" ng-click="addTicket()" ng-disabled="!ticket.$valid">Agregar</button>
           </div>
         </div>
         <div class="row" ng-show="editMode">
           <div class="col-lg-12">
-            <button type="button" class="btn btn-success" ng-click="saveTicket()">Guardar</button>
+            <button type="button" class="btn btn-success"   ng-click="saveTicket()">Guardar</button>
           </div>
         </div>
     </form>
