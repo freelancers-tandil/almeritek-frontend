@@ -17,8 +17,8 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
   };
 
   clienteFactory.getCliente=function(cliente,callback){
-    $http.get($rootScope.serverUrl + "/cliente/getCliente","json="+JSON.stringify(cliente)).success(function(data){
-      callback(data.getCliente);
+    $http.get($rootScope.serverUrl + "/cliente/cliente/"+cliente).success(function(data){
+      callback(data);
     }).error(function(data){
       callback(0);
     });
