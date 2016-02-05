@@ -62,6 +62,24 @@ app.config(function($routeProvider,$httpProvider){
   });
 
   $routeProvider
+  	.when('/usuarios/listar', {
+  		templateUrl: 'views/usuarios_listar.html',
+      controller: 'UsuariosController',
+    access : {
+      requiresLogin: true
+    }
+  });
+
+  $routeProvider
+    .when('/usuarios/agregar', {
+      templateUrl: 'views/usuarios_agregar.html',
+      controller: 'UsuariosController',
+    access : {
+      requiresLogin: true
+    }
+  });
+
+  $routeProvider
   	.when('/unauthorized', {
   		templateUrl: 'views/unauthorized.html',
     access : {
@@ -129,6 +147,7 @@ app.run(function($location,$rootScope,userFactory){
             if (!userFactory.isLoggedIn()){
               $location.path('/login');
             }else {
+              console.log(next);
               $location.path('/unauthorized');
             }
           }

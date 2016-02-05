@@ -73,6 +73,14 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
   }
 
 
+  userFactory.getAllUsuarios = function(callback){
+    $http.get($rootScope.serverUrl+'/user/list').success(function(data){
+      callback(data);
+    }).error(function(){
+      callback(false);
+    });
+  };
+
   userFactory.logout = function(){
     $http.get($rootScope.serverUrl+'/user/logout');
   }

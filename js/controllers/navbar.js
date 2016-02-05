@@ -45,12 +45,6 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
           icon : 'fa-list-alt',
           hasSubitems : true,
           subitems : [
-            { id : 'agregar',
-              text : 'Agregar',
-              route : '/tickets/agregar',
-              hasIcon : true,
-              icon : 'fa-plus'
-            },
             { id : 'listar',
               text : 'Listar',
               route : '/tickets/listar',
@@ -94,10 +88,24 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
         },
         { id: 'configuracion',
           text : 'Configuracion',
-          route : '/admin/configuracion',
+          route : '/configuracion',
           hasIcon : true,
           icon : 'fa-wrench',
-          hasSubitems : false,
+          hasSubitems : true,
+          subitems : [
+            { id : 'agregar',
+              text : 'Agregar',
+              route : '/usuarios/agregar',
+              hasIcon : true,
+              icon : 'fa-plus'
+            },
+            { id : 'listar',
+              text : 'Listar',
+              route : '/usuarios/listar',
+              hasIcon : true,
+              icon : 'fa-list'
+            }
+          ],
           restrictedAccess: false,
           rolesRequired : ['TECH_ROLE']
         },
