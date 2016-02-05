@@ -29,19 +29,22 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group date" id= "datetimepicker1" ng-class="{'has-error': !ticket.$pristine && ticket.fecha.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Fecha:</span>
-              <input type="text" name="fecha" class="form-control"  uib-datapicker-popup="{{'YYYY-MM-DD HH:mm:ss'}}" is-open="popup1.opened" placeholder="yyyy-dd-mm" aria-describedby="basic-addon1" ng-model="newTicket.fecha" requiered/>
+              <input type="text" name="fecha" class="form-control"  uib-datapicker-popup="{{'YYYY-MM-DD HH:mm:ss'}}" is-open="popup1.opened" placeholder="yyyy-mm-dd" aria-describedby="basic-addon1" ng-model="newTicket.fecha" required/>
               <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
-
+            <span ng-show="!ticket.$pristine && ticket.fecha.$error.required">El campo es obligatorio.</span>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="input-group">
+            <div class="input-group" ng-class="{'has-error': !ticket.$pristine && ticket.talle.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Taller:</span>
-              <input type="text" class="form-control" placeholder="Taller" aria-describedby="basic-addon1" ng-model="newTicket.taller">
+              <!-- <input type="text" name="talle" class="form-control" placeholder="Taller" aria-describedby="basic-addon1" ng-model="newTicket.taller" required> -->
+              <select class="form-control" name="talle" ng-init="getAlltalleres()" ng-model="newTicket.taller" required>
+                <option  ng-repeat="taller in talleres" value={{taller.id}}> {{taller.nombre}}</option>
+              </select>
             </div>
-            <!-- <span ng-show="!ticket.$pristine && ticket.fecha.$error.required">El campo es obligatorio.</span> -->
+            <span ng-show="!ticket.$pristine && ticket.talle.$error.required">El campo es obligatorio.</span>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group">

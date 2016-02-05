@@ -4,9 +4,6 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
 
   var ticketFactory = {};
 
-  // ticketFactory.tipo_cliente = [];
-  // ticketFactory.tipo_cliente[0] = 'EMPRESA';
-  // ticketFactory.tipo_cliente[1] = 'PERSONA';
 
   ticketFactory.getCantidadTickets = function(callback){
     $http.get($rootScope.serverUrl + "/ticket/cantidad").success(function(data){

@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.controller('TicketsController',function($scope,$rootScope,$timeout,$location,ticketFactory, clienteFactory){
+app.controller('TicketsController',function($scope,$rootScope,$timeout,$location,ticketFactory,clienteFactory,tallerFactory){
 
   $scope.tickets = [];
   $scope.search_field_txt = 'Nombre:';
@@ -10,6 +10,8 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.newTicket = {};
   $scope.editMode = false;
   $scope.clienteForTicket = $rootScope.newTicketClient;
+  $scope.talleres = [];
+
 
   if ($location.path()=='/tickets/editar'){
     $scope.editMode = true;
@@ -41,6 +43,14 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
       $scope.tickets=data;
     });
   };
+
+  $scope.getAlltalleres = function(){
+    tallerFactory.getAlltalleres(function(data){
+      $scope.talleres=data;
+      console.log(data);
+    });
+  };
+
 
   $scope.addTicket = function(){
     $scope.newTicket.cliente = $scope.clienteForTicket.id;
