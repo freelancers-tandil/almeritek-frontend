@@ -80,6 +80,15 @@ app.config(function($routeProvider,$httpProvider){
   });
 
   $routeProvider
+    .when('/usuarios/editar', {
+      templateUrl: 'views/usuarios_agregar.html',
+      controller: 'UsuariosController',
+    access : {
+      requiresLogin: true
+    }
+  });
+
+  $routeProvider
   	.when('/unauthorized', {
   		templateUrl: 'views/unauthorized.html',
     access : {

@@ -16,6 +16,8 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
     $scope.editMode = true;
     if ($rootScope.editUsuario!==undefined){
       $scope.newUsuario=$rootScope.editUsuario;
+      $scope.blank_password=$scope.newUsuario.password;
+      $scope.check_password=$scope.newUsuario.password;
     } else {
       $location.path('/');
     }
@@ -34,8 +36,9 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
     } else {
       $scope.newUsuario.rol=1;
     }
+    $scope.newUsuario.password = $scope.blank_password;
     userFactory.addUsuario($scope.newUsuario,function(data){
-      $scope.newClient = {};
+      $scope.newUsuario = {};
       $location.path('/usuarios/listar');
       $rootScope.addNotification($rootScope.notifications.SUCCESS,"Usuario agregado con exito.",5000);
     },function(data){
@@ -49,9 +52,14 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
     } else {
       $scope.newUsuario.rol=1;
     }
-    userFactory.saveUsuario($scope.newClient,function(data){
+    if ($scope.blank_password!=$scope.newUsuario.password){
+      $scope.newUsuario.password = $scope.blank_password;
+    } else {
+      $scope.newUsuario.password = null;
+    }
+    userFactory.saveUsuario($scope.newUsuario,function(data){
       $rootScope.addNotification($rootScope.notifications.SUCCESS,"Usuario guardado con exito.",5000);
-      $scope.newClient = {};
+      $scope.newUsuario = {};
     },function(data){
       $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });
@@ -61,7 +69,7 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
     userFactory.deleteUsuario($scope.usuarios[indice],function(data){
       $scope.usuarios.splice(indice,1);
       $rootScope.addNotification($rootScope.notifications.SUCCESS,"Usuario eliminado con exito.",5000);
-      $scope.newClient = {};
+      $scope.newUsuario = {};
     },function(data){
       $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });

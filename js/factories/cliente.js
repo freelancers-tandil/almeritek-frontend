@@ -32,6 +32,14 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
     });
   };
 
+  clienteFactory.getPagedClientes = function(page,amount,callback){
+    $http.get($rootScope.serverUrl + "/cliente/paginado/"+page+"/"+amount).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
   clienteFactory.addCliente = function(cliente,success,error){
     $http.post($rootScope.serverUrl+"/cliente","json="+JSON.stringify(cliente)).success(function(data){
       success(data);

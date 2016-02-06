@@ -34,7 +34,7 @@
           <div class="col-lg-6">
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">Password:</span>
-              <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" ng-model="newUsuario.password" tabindex="2"/>
+              <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" ng-model="blank_password" tabindex="2"/>
             </div>
           </div>
           <div class="col-lg-6">
@@ -63,7 +63,7 @@
         </div> -->
         <div class="row" ng-show="!editMode">
           <div class="col-lg-12">
-            <button type="button" class="btn btn-success" ng-click="addUsuario()" ng-disabled="!usuarios_form.$valid || (newUsuario.password!=check_password)">Agregar</button>
+            <button type="button" class="btn btn-success" ng-click="addUsuario()" ng-disabled="!usuarios_form.$valid || (blank_password!=check_password)">Agregar</button>
           </div>
         </div>
         <div class="row" ng-show="editMode">

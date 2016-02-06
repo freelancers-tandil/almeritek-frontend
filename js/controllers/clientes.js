@@ -9,6 +9,9 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   $scope.es_empresa = false;
   $scope.newClient = {};
   $scope.editMode = false;
+  $scope.cantidadPaginas=1;
+  $scope.cantidadPorPagina=25;
+  $scope.paginaActual=1;
 
   if ($location.path()=='/clientes/editar'){
     $scope.editMode = true;
@@ -20,6 +23,27 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
       $location.path('/');
     }
   }
+
+  $scope.initPagedList = function(){
+    clienteFactory.getCantidadClientes(function(data){
+      $scope.cantidadPaginas = ((data / $scope.cantidadPorPagina)|0)+1;
+    });
+    clienteFactory.getPagedClientes(1,$scope.cantidadPorPagina,function(data){
+      $scope.clientes=data;
+    });
+  };
+
+  $scope.loadPage = function(page){
+    clienteFactory.getPagedClientes(page,$scope.cantidadPorPagina,function(data){
+      $scope.paginaActual=page;
+      $scope.clientes=data;
+    });
+  };
+
+  $scope.getPages = function(){
+    console.log($scope.cantidadPaginas);
+    return new Array($scope.cantidadPaginas);
+  };
 
   $scope.getAllClientes = function(){
     clienteFactory.getAllClientes(function(data){
