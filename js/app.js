@@ -116,7 +116,7 @@ app.config(function($routeProvider,$httpProvider){
 
 });
 
-app.run(function($location,$rootScope,userFactory){
+app.run(function($location,$rootScope,$timeout,userFactory){
   $rootScope.serverUrl = 'http://localhost/almeritek-backend/index.php';
   $rootScope.isLogged=false;
   $rootScope.successNotifications = [];
@@ -165,4 +165,26 @@ app.run(function($location,$rootScope,userFactory){
     }
   });
   userFactory.initFactory();
+  $rootScope.notifications = {
+    list: [],
+    ERROR: 'error',
+    SUCCESS: 'success',
+    last_id: 0
+  };
+  $rootScope.addNotification = function(type,text,time){
+    if (type===$rootScope.notifications.SUCCESS){
+      var index = $rootScope.successNotifications.push({id: $rootScope.notifications.last_id, message: text});
+      $rootScope.notifications.last_id++;
+      $timeout(function(){
+        $rootScope.successNotifications.splice(index-1,1);
+      },time);
+    } else if (type===$rootScope.notifications.ERROR){
+      var index = $rootScope.errorNotifications.push({id: $rootScope.notifications.last_id, message: text});
+      $rootScope.notifications.last_id++;
+      $timeout(function(){
+        $rootScope.errorNotifications.splice(index-1,1);
+      },time);
+    }
+  };
+
 });

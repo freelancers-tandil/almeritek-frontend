@@ -72,12 +72,40 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
     return true;
   }
 
-
   userFactory.getAllUsuarios = function(callback){
     $http.get($rootScope.serverUrl+'/user/list').success(function(data){
       callback(data);
     }).error(function(){
       callback(false);
+    });
+  };
+
+  userFactory.addUsuario = function(user,success,error){
+    user.password = md5.createHash(user.password);
+    $http.post($rootScope.serverUrl+"/user","json="+JSON.stringify(user)).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
+
+  userFactory.saveUsuario = function(user,success,error){
+    $http.put($rootScope.serverUrl+"/user","json="+JSON.stringify(user)).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
+
+  userFactory.deleteUsuario = function(user,success,error){
+    $http({
+      method: 'DELETE',
+      url: $rootScope.serverUrl+"/user",
+      data: JSON.stringify(user)
+    }).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
     });
   };
 
