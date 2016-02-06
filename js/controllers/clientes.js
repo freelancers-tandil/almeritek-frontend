@@ -18,7 +18,6 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
     if ($rootScope.editClient!==undefined){
       $scope.newClient
       $scope.newClient=$rootScope.editClient;
-      console.log($scope.editClient);
     } else {
       $location.path('/');
     }
@@ -26,7 +25,8 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
 
   $scope.initPagedList = function(){
     clienteFactory.getCantidadClientes(function(data){
-      $scope.cantidadPaginas = ((data / $scope.cantidadPorPagina)|0)+1;
+      aux = ((data / $scope.cantidadPorPagina)|0);
+      aux < (data/$scope.cantidadPorPagina) ? $scope.cantidadPaginas = (aux+1) : $scope.cantidadPaginas=aux;
     });
     clienteFactory.getPagedClientes(1,$scope.cantidadPorPagina,function(data){
       $scope.clientes=data;
@@ -34,14 +34,20 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   };
 
   $scope.loadPage = function(page){
-    clienteFactory.getPagedClientes(page,$scope.cantidadPorPagina,function(data){
-      $scope.paginaActual=page;
-      $scope.clientes=data;
-    });
+    if ($scope.search_data==""){
+      clienteFactory.getPagedClientes(page,$scope.cantidadPorPagina,function(data){
+        $scope.paginaActual=page;
+        $scope.clientes=data;
+      });
+    } else {
+      clienteFactory.searchClientes($scope.search_data,page,$scope.cantidadPorPagina,function(data){
+        $scope.paginaActual=page;
+        $scope.clientes=data;
+      });
+    }
   };
 
   $scope.getPages = function(){
-    console.log($scope.cantidadPaginas);
     return new Array($scope.cantidadPaginas);
   };
 
@@ -96,6 +102,21 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   $scope.crearTicketCliente = function(cliente){
     $rootScope.newTicketClient = cliente;
     $location.path('/tickets/agregar');
+  };
 
-  }
+  $scope.updateSearch = function(){
+    if ($scope.search_data==""){
+      $scope.initPagedList();
+    } else {
+      clienteFactory.searchCantidadClientes($scope.search_data,function(data){
+        aux = ((data / $scope.cantidadPorPagina)|0);
+        aux < (data/$scope.cantidadPorPagina) ? $scope.cantidadPaginas = (aux+1) : $scope.cantidadPaginas=aux;
+      });
+      clienteFactory.searchClientes($scope.search_data,1,$scope.cantidadPorPagina,function(data){
+        $scope.paginaActual=1;
+        $scope.clientes=data;
+
+      });
+    }
+  };
 });

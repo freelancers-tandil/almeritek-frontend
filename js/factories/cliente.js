@@ -69,6 +69,43 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
     });
   };
 
+  clienteFactory.searchClientes = function(data,page,cantidad,callback){
+    cliente = {
+      nombre: data,
+      apellido_1: data,
+      apellido_2: data,
+      identity_number: data,
+      telefono_1: data,
+      telefono_2: data,
+      direccion: data,
+      codigo_postal: data
+    };
+    $http.get($rootScope.serverUrl + "/cliente/search/"+page+"/"+cantidad+"?json="+JSON.stringify(cliente)).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+  clienteFactory.searchCantidadClientes = function(data,callback){
+    cliente = {
+      nombre: data,
+      apellido_1: data,
+      apellido_2: data,
+      identity_number: data,
+      telefono_1: data,
+      telefono_2: data,
+      direccion: data,
+      codigo_postal: data
+    };
+    console.log(cliente);
+    $http.get($rootScope.serverUrl + "/cliente/searchcantidad?json="+JSON.stringify(cliente)).success(function(data){
+      callback(data.cantidad);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
   return clienteFactory;
 
 }]);
