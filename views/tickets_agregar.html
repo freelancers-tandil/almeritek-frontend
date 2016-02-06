@@ -29,7 +29,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group date" id= "datetimepicker1" ng-class="{'has-error': !ticket.$pristine && ticket.fecha.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Fecha:</span>
-              <input type="text" name="fecha" class="form-control"  uib-datapicker-popup="{{'YYYY-MM-DD HH:mm:ss'}}" is-open="popup1.opened" placeholder="yyyy-mm-dd" aria-describedby="basic-addon1" ng-model="newTicket.fecha" required/>
+              <input type="text" name="fecha" class="form-control"  uib-datapicker-popup="{{'YYYY-MM-DD HH:mm:ss'}}" is-open="popup1.opened" placeholder="YYYY-MM-DD" aria-describedby="basic-addon1" ng-model="newTicket.fecha" required/>
               <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
             <span ng-show="!ticket.$pristine && ticket.fecha.$error.required">El campo es obligatorio.</span>
@@ -97,9 +97,12 @@
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="input-group">
+            <div class="input-group" ng-class="{'has-error': !ticket.$pristine && ticket.users.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Usuario:</span>
-              <input type="text" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1" ng-model="newTicket.tecnico">
+              <select class="form-control" name="users" ng-init="getAllUsuarios()" ng-model="newTicket.tecnico" required>
+                <option  ng-repeat="usuario in usuarios" value={{user.id}}> {{user.nombre}}</option>
+              </select>
+              <!-- <input type="text" name="user" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1"  ng-model="newTicket.tecnico"> -->
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">

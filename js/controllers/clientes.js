@@ -33,16 +33,11 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
       $scope.newClient.apellido_2=null;
     }
     clienteFactory.addCliente($scope.newClient,function(data){
-      var index = $rootScope.successNotifications.push('Cliente agregado con exito.');
-      $timeout(function(){
-        $rootScope.successNotifications.splice(index,1);
-      },5000,index);
       $scope.newClient = {};
+      $location.path('/clientes/listar');
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Cliente agregado con exito.",5000);
     },function(data){
-      var index = $rootScope.errorNotifications.push(data.error.message);
-      $timeout(function(){
-        $rootScope.errorNotifications.splice(index-1,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });
   };
 
@@ -52,32 +47,20 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
       $scope.newClient.apellido_2=null;
     }
     clienteFactory.saveCliente($scope.newClient,function(data){
-      var index = $rootScope.successNotifications.push('Cliente guardado con exito.');
-      $timeout(function(){
-        $rootScope.successNotifications.splice(index,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Cliente guardado con exito.",5000);
       $scope.newClient = {};
     },function(data){
-      var index = $rootScope.errorNotifications.push(data.error.message);
-      $timeout(function(){
-        $rootScope.errorNotifications.splice(index-1,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });
   };
 
   $scope.deleteCliente = function(indice){
     clienteFactory.deleteCliente($scope.clientes[indice],function(data){
       $scope.clientes.splice(indice,1);
-      var index = $rootScope.successNotifications.push('Cliente eliminado con exito.');
-      $timeout(function(){
-        $rootScope.successNotifications.splice(index,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Cliente eliminado con exito.",5000);
       $scope.newClient = {};
     },function(data){
-      var index = $rootScope.errorNotifications.push(data.error.message);
-      $timeout(function(){
-        $rootScope.errorNotifications.splice(index-1,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });
   };
 

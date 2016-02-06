@@ -47,7 +47,6 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.getAlltalleres = function(){
     tallerFactory.getAlltalleres(function(data){
       $scope.talleres=data;
-      console.log(data);
     });
   };
 
@@ -55,48 +54,31 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.addTicket = function(){
     $scope.newTicket.cliente = $scope.clienteForTicket.id;
     ticketFactory.addTicket($scope.newTicket,function(data){
-      var index = $rootScope.successNotifications.push('Ticket agregado con exito.');
-      $timeout(function(){
-        $rootScope.successNotifications.splice(index,1);
-      },5000,index);
       $scope.newTicket = {};
+      $location.path('/ticket/listar');
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Ticket agregado con exito.",5000);
     },function(data){
-      var index = $rootScope.errorNotifications.push(data.error.message);
-      $timeout(function(){
-        $rootScope.errorNotifications.splice(index-1,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });
   };
 
   $scope.saveTicket = function(){
     $scope.newTicket.cliente = $scope.clienteForTicket.id;
     ticketFactory.saveTicket($scope.newTicket,function(data){
-      var index = $rootScope.successNotifications.push('Ticket guardado con exito.');
-      $timeout(function(){
-        $rootScope.successNotifications.splice(index,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Ticket guardado con exito.",5000);
       $scope.newTicket = {};
     },function(data){
-      var index = $rootScope.errorNotifications.push(data.error.message);
-      $timeout(function(){
-        $rootScope.errorNotifications.splice(index-1,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });
   };
 
   $scope.deleteTicket = function(indice){
     ticketFactory.deleteTicket($scope.tickets[indice],function(data){
       $scope.tickets.splice(indice,1);
-      var index = $rootScope.successNotifications.push('Ticket eliminado con exito.');
-      $timeout(function(){
-        $rootScope.successNotifications.splice(index,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Ticket eliminado con exito.",5000);
       $scope.newClient = {};
     },function(data){
-      var index = $rootScope.errorNotifications.push(data.error.message);
-      $timeout(function(){
-        $rootScope.errorNotifications.splice(index-1,1);
-      },5000,index);
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
     });
   };
 

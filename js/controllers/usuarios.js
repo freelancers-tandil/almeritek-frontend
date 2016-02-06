@@ -8,8 +8,8 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
   $scope.search_field = 'nombre';
   $scope.search_data = '';
   $scope.es_admin = false;
-  $scope.newUsuario = {};
   $scope.editMode = false;
+  
 
 
   if ($location.path()=='/usuarios/editar'){
