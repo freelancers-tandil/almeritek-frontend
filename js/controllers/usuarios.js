@@ -9,7 +9,7 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
   $scope.search_data = '';
   $scope.es_admin = false;
   $scope.editMode = false;
-  
+
 
 
   if ($location.path()=='/usuarios/editar'){
@@ -26,6 +26,7 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
   $scope.getAllUsuarios = function(){
     userFactory.getAllUsuarios(function(data){
       $scope.usuarios=data;
+      console.log($scope.usuarios);
     });
   };
 

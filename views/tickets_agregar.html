@@ -5,18 +5,6 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-12">
-      <div class="alert alert-success alert-dismissible" role="alert" ng-repeat="success in $root.successNotifications">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="$root.successNotifications.splice($index,1)"><span aria-hidden="true">&times;</span></button>
-        <strong>Bien!</strong> {{success}}
-      </div>
-      <div class="alert alert-danger alert-dismissible" role="alert" ng-repeat="error in $root.errorNotifications">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="$root.errorNotifications.splice($index,1)"><span aria-hidden="true">&times;</span></button>
-        <strong>Error!</strong> {{error}}
-      </div>
-    </div>
-  </div>
-  <div class="row">
       <form id="ticket-add" name="ticket">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">
@@ -97,12 +85,11 @@
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="input-group" ng-class="{'has-error': !ticket.$pristine && ticket.users.$error.required}">
+            <div class="input-group" >
               <span class="input-group-addon" id="basic-addon1">Usuario:</span>
-              <select class="form-control" name="users" ng-init="getAllUsuarios()" ng-model="newTicket.tecnico" required>
-                <option  ng-repeat="usuario in usuarios" value={{user.id}}> {{user.nombre}}</option>
+              <select class="form-control" id="userSelect" name="users" ng-init="getAllUsuarios()" ng-model="newTicket.tecnico">
+                <option  ng-repeat="usuario in usuarios" value={{usuario.id}}> {{usuario.nombre + " " +  usuario.apellido}}</option>
               </select>
-              <!-- <input type="text" name="user" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1"  ng-model="newTicket.tecnico"> -->
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">

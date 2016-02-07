@@ -1,8 +1,9 @@
 var app = angular.module('app');
 
-app.controller('TicketsController',function($scope,$rootScope,$timeout,$location,ticketFactory,clienteFactory,tallerFactory){
+app.controller('TicketsController',function($scope,$rootScope,$timeout,$location,ticketFactory,clienteFactory,tallerFactory, userFactory){
 
   $scope.tickets = [];
+  $scope.usuarios = [];
   $scope.search_field_txt = 'Nombre:';
   $scope.search_field = 'nombre';
   $scope.search_data = '';
@@ -12,6 +13,10 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.clienteForTicket = $rootScope.newTicketClient;
   $scope.talleres = [];
 
+
+  $(document).ready(function() {
+  $("#userSelect").select2();
+  });
 
   if ($location.path()=='/tickets/editar'){
     $scope.editMode = true;
@@ -38,6 +43,13 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   //
   // });
 
+  $scope.getAllUsuarios = function(){
+    userFactory.getAllUsuarios(function(data){
+      $scope.usuarios=data;
+      console.log($scope.usuarios);
+    });
+  };
+
   $scope.getAllTickets = function(){
     ticketFactory.getAllTickets(function(data){
       $scope.tickets=data;
@@ -55,7 +67,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     $scope.newTicket.cliente = $scope.clienteForTicket.id;
     ticketFactory.addTicket($scope.newTicket,function(data){
       $scope.newTicket = {};
-      $location.path('/ticket/listar');
+      $location.path('/tickets/agregar');
       $rootScope.addNotification($rootScope.notifications.SUCCESS,"Ticket agregado con exito.",5000);
     },function(data){
       $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);

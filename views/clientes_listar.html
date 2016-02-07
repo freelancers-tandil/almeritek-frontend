@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div id="lista" class="row">
+  <div id="lista" class="row" >
     <div class="col-lg-12">
       <div class="panel panel-default">
         <div class="table-responsive" ng-init="initPagedList()">
@@ -34,6 +34,7 @@
               <td>{{cliente.telefono_1}}</td>
               <td>{{cliente.direccion_1}}</td>
               <td>
+                <div class="btn" href="" ng-click="verCliente(cliente)"><span class="glyphicon glyphicon-eye-open" title ="Ver cliente"></span></div>
                 <div class="btn" href="" ng-click="editarCliente(cliente)"><span class="glyphicon glyphicon-pencil" title ="Editar cliente"></span></div>
                 <div class="btn" href="" ng-click="deleteCliente($index)"><span class="glyphicon glyphicon-trash" title ="Eliminar cliente"></span></div>
                 <div class="btn" href="" ng-click="crearTicketCliente(cliente)"><span class="glyphicon glyphicon-list-alt" title ="Agregar ticket"></span></div>
