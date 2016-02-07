@@ -109,6 +109,7 @@ app.config(function($routeProvider,$httpProvider){
    .when('/tickets/agregar', {
      templateUrl: 'views/tickets_agregar.html',
     controller: 'TicketsController',
+    controllerAs: 'TicketCont',
     access : {
       requiresLogin: true
     }

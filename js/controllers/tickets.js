@@ -12,6 +12,8 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.editMode = false;
   $scope.clienteForTicket = $rootScope.newTicketClient;
   $scope.talleres = [];
+  $scope.showModal = false;
+  $scope.showNewClientModal = false;
 
 
   $(document).ready(function() {
@@ -94,8 +96,33 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     });
   };
 
+  $scope.addCliente = function(newClient,es_empresa){
+    if (es_empresa){
+      newClient.apellido_1=null;
+      newClient.apellido_2=null;
+    }
+    clienteFactory.addCliente($scope.newClient,function(data){
+      $scope.clienteForTicket = newClient;
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Cliente agregado con exito.",5000);
+    },function(data){
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
+    });
+  };
+
   $scope.editarTicket = function(ticket){
     $rootScope.editTicket = ticket;
     $location.path('/tickets/editar');
   };
+
+  $scope.toggleModal = function(){
+    $scope.showModal = !$scope.showModal;
+  };
+
+  $scope.toggleNewClientModal = function(){
+    $scope.showNewClientModal = !$scope.showNewClientModal;
+  };
+
+  $scope.setCliente = function(cliente){
+    $scope.clienteForTicket = cliente;
+  }
 });
