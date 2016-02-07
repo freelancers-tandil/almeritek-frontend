@@ -51,6 +51,15 @@ app.config(function($routeProvider,$httpProvider){
      }
     });
 
+    $routeProvider
+     .when('/clientes/ver', {
+       templateUrl: 'views/clientes_ver.html',
+      controller: 'ClientesController',
+      access : {
+        requiresLogin: true
+      }
+     });
+
   $routeProvider
   	.when('/user', {
   		templateUrl: 'views/admin.html',

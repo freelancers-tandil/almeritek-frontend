@@ -16,12 +16,19 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   if ($location.path()=='/clientes/editar'){
     $scope.editMode = true;
     if ($rootScope.editClient!==undefined){
-      $scope.newClient
       $scope.newClient=$rootScope.editClient;
     } else {
       $location.path('/');
     }
+  } else if ($location.path()=='/clientes/ver'){
+    $scope.editMode = false;
+    if ($rootScope.verClient!==undefined){
+      $scope.newClient=$rootScope.verClient;
+    } else {
+      $location.path('/');
+    }
   }
+
 
   $scope.initPagedList = function(){
     clienteFactory.getCantidadClientes(function(data){
@@ -97,6 +104,11 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   $scope.editarCliente = function(cliente){
     $rootScope.editClient = cliente;
     $location.path('/clientes/editar');
+  };
+
+  $scope.verCliente = function (cliente){
+    $rootScope.verClient = cliente;
+    $location.path ('/clientes/ver');
   };
 
   $scope.crearTicketCliente = function(cliente){
