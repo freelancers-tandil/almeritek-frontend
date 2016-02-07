@@ -24,6 +24,11 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
     $scope.editMode = false;
     if ($rootScope.verClient!==undefined){
       $scope.newClient=$rootScope.verClient;
+      if ($scope.newClient.tipo_cliente!=0) {
+        $scope.es_empresa=true;
+      } else{
+        $scope.es_empresa=false;
+      }
     } else {
       $location.path('/');
     }
@@ -68,6 +73,9 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
     if ($scope.es_empresa){
       $scope.newClient.apellido_1=null;
       $scope.newClient.apellido_2=null;
+      $scope.newClient.tipo_cliente=1;
+    } else{
+      $scope.newClient.tipo_cliente=0;
     }
     clienteFactory.addCliente($scope.newClient,function(data){
       $scope.newClient = {};
@@ -82,6 +90,9 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
     if ($scope.es_empresa){
       $scope.newClient.apellido_1=null;
       $scope.newClient.apellido_2=null;
+      $scope.newClient.tipo_cliente=1;
+    } else{
+      $scope.newClient.tipo_cliente=0;
     }
     clienteFactory.saveCliente($scope.newClient,function(data){
       $rootScope.addNotification($rootScope.notifications.SUCCESS,"Cliente guardado con exito.",5000);
