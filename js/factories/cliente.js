@@ -8,6 +8,7 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
   clienteFactory.tipo_cliente[0] = 'EMPRESA';
   clienteFactory.tipo_cliente[1] = 'PERSONA';
 
+
   clienteFactory.getCantidadClientes = function(callback){
     $http.get($rootScope.serverUrl + "/cliente/cantidad").success(function(data){
       callback(data.cantidad);
@@ -26,6 +27,14 @@ app.factory('clienteFactory',[ '$http', '$rootScope', function($http,$rootScope)
 
   clienteFactory.getAllClientes = function(callback){
     $http.get($rootScope.serverUrl + "/cliente/list").success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+  clienteFactory.getAllTicketsForClient = function(cliente, callback){
+    $http.get($rootScope.serverUrl + "/cliente/tickets_cliente/"+cliente).success(function(data){
       callback(data);
     }).error(function(data){
       callback([]);

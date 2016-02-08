@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.controller('ClientesController',function($scope,$rootScope,$timeout,$location,clienteFactory){
+app.controller('ClientesController',function($scope,$rootScope,$timeout,$location,clienteFactory, ticketFactory){
 
   $scope.clientes = [];
   $scope.search_field_txt = 'Nombre:';
@@ -12,6 +12,7 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   $scope.cantidadPaginas=1;
   $scope.cantidadPorPagina=25;
   $scope.paginaActual=1;
+  $scope.ticketsCliente =[]; 
 
   if ($location.path()=='/clientes/editar'){
     $scope.editMode = true;
@@ -34,6 +35,13 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
     }
   }
 
+  $scope.getAllTicketsForClient=function(){
+    clienteFactory.getAllTicketsForClient($scope.newClient.id, function(data){
+      $scope.ticketsCliente=data;
+      console.log($scope.ticketsCliente);
+        console.log($scope.newClient.id);
+    });
+  };
 
   $scope.initPagedList = function(){
     clienteFactory.getCantidadClientes(function(data){
