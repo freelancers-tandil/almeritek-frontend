@@ -112,14 +112,14 @@
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">Beneficio tecnico:</span>
-              <input type="text" class="form-control" placeholder="Beneficio tecnico" aria-describedby="basic-addon1" ng-model="newTicket.beneficio_tecnico">
+              <span class="input-group-addon" id="basic-addon1">Costo reparación:</span>
+              <input type="text" class="form-control" placeholder="00.00" aria-describedby="basic-addon1" ng-model="newTicket.costo_reparacion">
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">Costo reparación:</span>
-              <input type="text" class="form-control" placeholder="00.00" aria-describedby="basic-addon1" ng-model="newTicket.costo_reparacion">
+              <span class="input-group-addon" id="basic-addon1">Costo + iva:</span>
+              <input type="text" class="form-control" placeholder=" " aria-describedby="basic-addon1" ng-value="newTicket.costo_reparacion !=null?newTicket.costo_reparacion * 1.21:0">
             </div>
           </div>
         </div>
