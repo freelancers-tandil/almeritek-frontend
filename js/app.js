@@ -5,6 +5,7 @@ var app = angular.module('app', ['ngRoute',
                                   'ui.bootstrap'
                                         ]);
 
+
 app.config(function($routeProvider,$httpProvider){
 
   $routeProvider
@@ -203,6 +204,16 @@ app.run(function($location,$rootScope,$timeout,userFactory){
       $timeout(function(){
         $rootScope.errorNotifications.splice(index-1,1);
       },time);
+    }
+  };
+  $rootScope.constants = {
+    status: {
+      RECIBIDO: {code:0,text:"Recibido"},
+      PRESUPUESTADO: {code:1,text:"Presupuestado"},
+      ENCURSO: {code:2,text:"En Curso"},
+      REPARADO: {code:3,text:"Reparado"},
+      ENTREGADO: {code:4,text:"Entregado"},
+      CANCELADO: {code:5,text:"Cancelado"}
     }
   };
 

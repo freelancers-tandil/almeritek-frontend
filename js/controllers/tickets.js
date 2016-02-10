@@ -10,15 +10,18 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.es_empresa = false;
   $scope.newTicket = {};
   $scope.editMode = false;
+
   $scope.clienteForTicket = $rootScope.newTicketClient;
+  $scope.tecnicoForTicket = $rootScope.newTicketTecnico;
+  $scope.tallerForTicket = $rootScope.newTicketTaller;
+
   $scope.talleres = [];
   $scope.showModal = false;
   $scope.showNewClientModal = false;
+  $scope.showTecnicoModal = false;
+  $scope.showTallerModal = false;
 
 
-  $(document).ready(function() {
-  $("#userSelect").select2();
-  });
 
   if ($location.path()=='/tickets/editar'){
     $scope.editMode = true;
@@ -48,7 +51,6 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.getAllUsuarios = function(){
     userFactory.getAllUsuarios(function(data){
       $scope.usuarios=data;
-      console.log($scope.usuarios);
     });
   };
 
@@ -122,7 +124,30 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     $scope.showNewClientModal = !$scope.showNewClientModal;
   };
 
+  $scope.toggleTecnicoModal = function(){
+    $scope.showTecnicoModal = !$scope.showTecnicoModal;
+  };
+
+  $scope.toggleTallerModal = function(){
+    $scope.showTallerModal = !$scope.showTallerModal;
+  };
+
   $scope.setCliente = function(cliente){
     $scope.clienteForTicket = cliente;
-  }
+  };
+
+  $scope.setTecnico = function(tecnico){
+    $scope.tecnicoForTicket = tecnico;
+    $scope.newTicket.tecnico=tecnico.id;
+  };
+
+  $scope.setTaller = function(taller){
+    $scope.tallerForTicket = taller;
+    $scope.newTicket.taller=taller.id;
+  };
+
+  $scope.$on('$viewContentLoaded', function(){
+    $tallerSelect = $("#userSelect").select2();
+  });
+
 });

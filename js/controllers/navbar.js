@@ -45,6 +45,12 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
           icon : 'fa-list-alt',
           hasSubitems : true,
           subitems : [
+            { id : 'agregar',
+              text : 'Agregar',
+              route : '/tickets/agregar',
+              hasIcon : true,
+              icon : 'fa-plus'
+            },
             { id : 'listar',
               text : 'Listar',
               route : '/tickets/listar',
