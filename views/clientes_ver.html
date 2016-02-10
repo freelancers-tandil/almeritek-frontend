@@ -70,14 +70,14 @@
             <tr ng-repeat ="ticket in ticketsCliente">
               <td> {{ticket.num_ticket}}</td>
               <td> {{ticket.fecha}}</td>
-              <td> {{ticket.taller}}</td>
+              <td> {{ticket.nombre_taller}}</td>
               <td> {{ticket.equipo}}</td>
               <td> {{ticket.modelo}}</td>
               <td> {{ticket.marca}}</td>
               <td> {{ticket.imei}}</td>
               <td> {{ticket.nombre + " " + ticket.apellido_1}}</td>
               <td> {{ticket.costo_reparacion}}</td>
-              <td> {{ticket.tecnico}}</td>
+              <td> {{ticket.nombre_usuario + " " + ticket.apellido_usuario}}</td>
               <td> {{ticket.avisado}}</td>
               <td> {{ticket.estado}}</td>
             </tr>
