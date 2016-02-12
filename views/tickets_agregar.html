@@ -67,7 +67,10 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">Estado:</span>
-              <input type="text" class="form-control" placeholder="Estado" aria-describedby="basic-addon1" ng-model="newTicket.estado">
+              <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="estadoForTicket.text" disabled>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="toggleEstadoModal()" ><span class="glyphicon glyphicon-search"></span></button>
+              </span>
             </div>
           </div>
 
@@ -369,6 +372,40 @@
                 <td>{{taller.telefono}}</td>
                 <td>
                   <div class="btn btn-default" href="" data-dismiss="modal" ng-click="$parent.setTaller(taller)">Seleccionar</div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</client-modal>
+
+<client-modal title="Buscar estado" visible="showEstadoModal">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Busqueda:</span>
+          <input type="text" class="form-control" placeholder="Dato..." aria-describedby="basic-addon1" ng-model="search_data">
+        </div>
+      </div>
+    </div>
+
+    <div id="lista" class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="table-responsive" ng-init="getAllEstados()">
+            <table class="table table-striped table-condensed table-hover" style="width:100%">
+              <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+              </tr>
+              <tr ng-repeat="estado in estados | filter: search_data">
+                <td>{{estado.text}}</td>
+                <td>
+                  <div class="btn btn-default" href="" data-dismiss="modal" ng-click="setEstado(estado)">Seleccionar</div>
                 </td>
               </tr>
             </table>

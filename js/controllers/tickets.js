@@ -14,12 +14,15 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.clienteForTicket = $rootScope.newTicketClient;
   $scope.tecnicoForTicket = $rootScope.newTicketTecnico;
   $scope.tallerForTicket = $rootScope.newTicketTaller;
+  $scope.estadoForTicket = $rootScope.newTicketEstado;
 
   $scope.talleres = [];
   $scope.showModal = false;
   $scope.showNewClientModal = false;
   $scope.showTecnicoModal = false;
   $scope.showTallerModal = false;
+  $scope.showEstadoModal = false;
+  $scope.estados =[]; //$scope.constants.status;
 
 
 
@@ -36,17 +39,6 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     }
 
   };
-
-  // $(function () {
-  //     $('#datetimepicker1').datetimepicker({
-  //       format : "YYYY-MM-DD HH:mm:ss"
-  //     });
-  //     $('#datetimepicker1 input').on("dp.change", function(){
-  //       $scope.newTicket.fecha=$('#datetimepicker1 input').val();
-  //       console.log($scope.newTicket.fecha);
-  //     });
-  //
-  // });
 
   $scope.getAllUsuarios = function(){
     userFactory.getAllUsuarios(function(data){
@@ -132,6 +124,11 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     $scope.showTallerModal = !$scope.showTallerModal;
   };
 
+  $scope.toggleEstadoModal = function(){
+    $scope.showEstadoModal = !$scope.showEstadoModal;
+
+  };
+
   $scope.setCliente = function(cliente){
     $scope.clienteForTicket = cliente;
   };
@@ -144,6 +141,17 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.setTaller = function(taller){
     $scope.tallerForTicket = taller;
     $scope.newTicket.taller=taller.id;
+  };
+
+  $scope.getAllEstados = function(){
+    var aux= $rootScope.constants.status;
+    $scope.estados=[aux.RECIBIDO, aux.PRESUPUESTADO, aux.ENCURSO, aux.REPARADO,aux.ENTREGADO, aux.CANCELADO];
+
+  }
+
+  $scope.setEstado = function(estado){
+    $scope.estadoForTicket = estado;
+    $scope.newTicket.estado = estado.code;
   };
 
   $scope.$on('$viewContentLoaded', function(){
