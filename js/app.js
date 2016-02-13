@@ -134,6 +134,15 @@ app.config(function($routeProvider,$httpProvider){
      }
     });
 
+    $routeProvider
+      .when('/pedidos/listar', {
+        templateUrl: 'views/pedidos_listar.html',
+      controller: 'PedidosController',
+      access : {
+        requiresLogin: true
+      }
+    });
+
 });
 
 app.run(function($location,$rootScope,$timeout,userFactory){
@@ -206,6 +215,7 @@ app.run(function($location,$rootScope,$timeout,userFactory){
       },time);
     }
   };
+
   $rootScope.constants = {
     status: {
       RECIBIDO: {code:0,text:"Recibido"},
@@ -214,6 +224,10 @@ app.run(function($location,$rootScope,$timeout,userFactory){
       REPARADO: {code:3,text:"Reparado"},
       ENTREGADO: {code:4,text:"Entregado"},
       CANCELADO: {code:5,text:"Cancelado"}
+    },
+    roles: {
+      ADMIN_ROLE: {code: 0, value: "ADMIN_ROLE"},
+      TECH_ROLE: {code: 1, value: "TECH_ROLE"}
     }
   };
 

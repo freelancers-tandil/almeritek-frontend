@@ -62,28 +62,22 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
           restrictedAccess: false,
           rolesRequired : ['TECH_ROLE']
         },
-        { id : 'compras',
-          text : 'Compras',
-          route : '/admin/compras',
+        { id : 'pedidos',
+          text : 'Pedidos',
+          route : '/pedidos',
           hasIcon : true,
           icon : 'fa-edit',
           hasSubitems : true,
           subitems : [
             { id: 'urgentes',
               text : 'Ver Urgentes',
-              route : '/admin/compras/urgentes',
+              route : '/pedidos/urgentes',
               hasIcon : true,
               icon : 'fa-exclamation'
             },
-            { id : 'agregar',
-              text : 'Agregar',
-              route : '/admin/compras/agregar',
-              hasIcon : true,
-              icon : 'fa-plus'
-            },
             { id : 'listar',
               text : 'Listar',
-              route : '/admin/compras/listar',
+              route : '/pedidos/listar',
               hasIcon : true,
               icon : 'fa-list'
             }
@@ -100,13 +94,13 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
           hasSubitems : true,
           subitems : [
             { id : 'agregar',
-              text : 'Agregar',
+              text : 'Agregar Usuarios',
               route : '/usuarios/agregar',
               hasIcon : true,
               icon : 'fa-plus'
             },
             { id : 'listar',
-              text : 'Listar',
+              text : 'Listar Usuarios',
               route : '/usuarios/listar',
               hasIcon : true,
               icon : 'fa-list'

@@ -17,7 +17,7 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
     userFactory.checkServerLogin(function(data){
       userFactory.isLogged=true;
       $rootScope.isLogged=true;
-      userFactory.user=data.data;
+      userFactory.user=data;
       $rootScope.loadComplete=true;
     },function(data){
       userFactory.isLogged=false;
