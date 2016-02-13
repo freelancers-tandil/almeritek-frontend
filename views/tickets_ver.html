@@ -1,0 +1,72 @@
+<div id="page-wrapper" class="container-fluid" ng-cloak>
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Información del Ticket</h1>
+    </div>
+  </div>
+
+  <div id="lista" class="row" >
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-6">
+          <label for="name">Numero de ticket:</label>
+          <span>{{newTicket.num_ticket}}</span>
+        </div>
+        <div class="col-lg-6">
+          <label for="fecha">Fecha:</label>
+          <span>{{newTicket.fecha}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label for="taller">Taller:</label>
+          <span id="taller">{{newTicket.taller}}</span>
+        </div>
+        <div class="col-lg-6">
+          <label for="equipo">Equipo:</label>
+          <span id="equipo">{{newTicket.equipo}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label for="modelo">Modelo:</label>
+          <span id="modelo">{{newTicket.modelo}}</span>
+        </div>
+        <div class="col-lg-6">
+          <label for="marca">Marca:</label>
+          <span id="marca">{{newTicket.marca}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label for="imei">Imei:</label>
+          <span id="imei">{{newTicket.imei}}</span>
+        </div>
+        <div class="col-lg-6">
+          <label for="cliente">Cliente:</label>
+          <span id="cliente">{{clienteForTicket.nombre}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label for="costo_reparacion">Costo reparacion:</label>
+          <span id="costo_reparacion">{{newTicket.costo_reparacion}}</span>
+        </div>
+        <div class="col-lg-6">
+          <label for="usuario">Usuario:</label>
+          <span id="usuario">{{newTicket.tecnico}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label for="avisado">Avisado:</label>
+          <span id="avisado">{{newTicket.avisado}}</span>
+        </div>
+        <div class="col-lg-6">
+          <label for="estado">Estado:</label>
+          <span id="estado">{{newTicket.estado}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -142,6 +142,14 @@ app.config(function($routeProvider,$httpProvider){
         requiresLogin: true
       }
     });
+    $routeProvider
+     .when('/tickets/ver', {
+       templateUrl: 'views/tickets_ver.html',
+      controller: 'TicketsController',
+      access : {
+        requiresLogin: true
+      }
+     });
 
 });
 

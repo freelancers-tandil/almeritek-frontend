@@ -29,6 +29,14 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
     });
   };
 
+  ticketFactory.get_Ticket = function(ticket, callback){
+    $http.get($rootScope.serverUrl + "/ticket/ticket/"+ticket).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
   ticketFactory.saveTicket = function(ticket,success,error){
     $http.put($rootScope.serverUrl+"/ticket","json="+JSON.stringify(ticket)).success(function(data){
       success(data);

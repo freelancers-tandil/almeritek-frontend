@@ -22,7 +22,9 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.showTecnicoModal = false;
   $scope.showTallerModal = false;
   $scope.showEstadoModal = false;
-  $scope.estados =[]; //$scope.constants.status;
+  $scope.estados =[];
+  $scope.ticket =[];
+
 
 
 
@@ -38,7 +40,15 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
       $location.path('/');
     }
 
-  };
+  }
+  else if ($location.path()=='/tickets/ver'){
+   $scope.editMode = false;
+   if ($rootScope.ver_Ticket!==undefined){
+     $scope.newTicket=$rootScope.ver_Ticket;
+   } else {
+     $location.path('/');
+   }
+ };
 
   $scope.getAllUsuarios = function(){
     userFactory.getAllUsuarios(function(data){
@@ -103,9 +113,22 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     });
   };
 
+  $scope.getTicket = function(){
+    ticketFactory.get_Ticket($scope.newTicket.id, function(data){
+      $scope.ticket=data;
+      console.log($scope.ticket);
+        console.log($scope.newTicket.id);
+    });
+  };
+
   $scope.editarTicket = function(ticket){
     $rootScope.editTicket = ticket;
     $location.path('/tickets/editar');
+  };
+
+  $scope.verTicket = function(ticket){
+    $rootScope.ver_Ticket = ticket;
+    $location.path('/tickets/ver');
   };
 
   $scope.toggleModal = function(){

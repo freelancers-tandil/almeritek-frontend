@@ -50,6 +50,7 @@
               <td>{{ticket.avisado}}</td>
               <td>{{ticket.estado}}</td>
               <td>
+                <div class="btn" href="" ng-click="verTicket(ticket)"><span class="glyphicon glyphicon-eye-open" title ="Ver ticket"></span></div>
                 <div class="btn" href="" ng-click="editarTicket(ticket)"><span class="glyphicon glyphicon-pencil" title = "Editar ticket"></span></div>
                 <div class="btn" href="" ng-click="deleteTicket($index)"><span class="glyphicon glyphicon-trash" title = "Eliminar ticket"></span></div>
               </td>
