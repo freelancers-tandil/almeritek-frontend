@@ -12,7 +12,8 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
           hasIcon : true,
           icon : 'fa-dashboard',
           hasSubitems : false,
-          restrictedAccess: false
+          restrictedAccess: true,
+          rolesRequired: ['ADMIN_ROLE']
         },
         { id : 'clientes',
           text : 'Clientes',

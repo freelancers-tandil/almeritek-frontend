@@ -14,11 +14,7 @@ app.controller('LoginController',function($scope,$rootScope,$location,userFactor
   $scope.login = function(){
     userFactory.login($scope.username,$scope.password,function(logged){
       if (logged!==false){
-        if(($rootScope.originalPath!==undefined)&&($rootScope.originalPath!=='/login')){
-          $location.path($rootScope.originalPath);
-        } else {
-          $location.path('/');
-        }
+        $location.path($rootScope.startPaths[userFactory.loggedUser().rol]);
       }
     },function(data){
       $scope.password="";

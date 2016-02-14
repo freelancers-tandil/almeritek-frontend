@@ -115,6 +115,10 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
 
   userFactory.logout = function(){
     $http.get($rootScope.serverUrl+'/user/logout');
+    userFactory.user={};
+    userFactory.isLogged = false;
+    $rootScope.startNavbar=true;
+    $location.path('/login');
   }
 
   return userFactory;

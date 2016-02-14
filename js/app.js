@@ -23,7 +23,9 @@ app.config(function($routeProvider,$httpProvider){
   		templateUrl: 'views/admin.html',
     controller: 'DashboardController',
     access : {
-      requiresLogin: true
+      requiresLogin: true,
+      requiredPermissions: ['ADMIN_ROLE'],
+      permissionType: 'AtLeastOne'
     }
   });
 
@@ -168,6 +170,9 @@ app.run(function($location,$rootScope,$timeout,userFactory){
     SUCCESS: 'success',
     last_id: 0
   };
+  $rootScope.startPaths = [];
+  $rootScope.startPaths[0] = '/';
+  $rootScope.startPaths[1] = '/tickets/listar';
   $rootScope.constants = {
     status: {
       RECIBIDO: {code:0,text:"Recibido"},
@@ -215,13 +220,17 @@ app.run(function($location,$rootScope,$timeout,userFactory){
         $rootScope.showSidebar=false;
         var path;
         if (next==undefined){
+          var goto = '/';
           if (userFactory.isLoggedIn()){
             $rootScope.showSidebar=true;
+            goto=$rootScope.startPaths[userFactory.loggedUser().rol];
           }
-          $location.path('/');
+          $location.path(goto);
           return;
         }
-        if (next.originalPath!=='/login')
+        if (next.originalPath=='/'){
+          path=$rootScope.startPaths[userFactory.loggedUser().rol];
+        } else if (next.originalPath!=='/login')
           path = next.originalPath;
         if ((next.access!==undefined)&&(next.access.requiresLogin)){
           if (userFactory.hasAuthorization(next)){
@@ -234,7 +243,7 @@ app.run(function($location,$rootScope,$timeout,userFactory){
               $location.path('/login');
             }else {
               $rootScope.addNotification($rootScope.notifications.ERROR,"Usted no esta autorizado para acceder a esta funcion del sistema.",5000);
-              $location.path('/');
+              $location.path($rootScope.startPaths[userFactory.loggedUser().rol]);
             }
           }
         }
