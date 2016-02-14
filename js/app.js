@@ -8,6 +8,8 @@ var app = angular.module('app', ['ngRoute',
 
 app.config(function($routeProvider,$httpProvider){
 
+  $httpProvider.interceptors.push('httpInterceptor');
+
   $routeProvider
   	.when('/login', {
   		templateUrl: 'views/login.html',
