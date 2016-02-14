@@ -224,10 +224,10 @@
                   </div>
 
               </li>
-              <li ng-repeat="item in sidebar.items" ng-class="{'active':item.hasSubitems && item.is_open}" ng-show="canView(item)">
+              <li ng-repeat="item in sidebar.items" ng-class="{'active':item.hasSubitems && item.is_open}" ng-show="item.visible!=undefined && item.visible">
                   <a href="" ng-click="item.hasSubitems ? item.is_open=!item.is_open:open(item.route)" ><i ng-class="{'{{item.icon}}':item.hasIcon}" class="fa fa-fw"></i> {{item.text}} <span class="fa arrow" ng-show="item.hasSubitems"></span></a>
                   <ul class="nav nav-second-level" ng-show="item.hasSubitems ? item.is_open : false">
-                      <li ng-repeat="subitem in item.subitems" ng-show="canView(subitem)">
+                      <li ng-repeat="subitem in item.subitems" ng-show="subitem.visible!=undefined && subitem.visible">
                         <a href="" ng-click="subitem.hasSubitems ? subitem.is_open=!subitem.is_open:open(subitem.route)"><i ng-class="{'{{subitem.icon}}':subitem.hasIcon}" class="fa fa-fw"></i> {{subitem.text}}</a>
                       </li>
                   </ul>

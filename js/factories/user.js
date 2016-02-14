@@ -51,7 +51,6 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
   }
 
   userFactory.hasAuthorization = function(route){
-    //alert(userFactory.role_constants[userFactory.user.rol] + " , " + userFactory.user.rol);
     if (route.access !== undefined){
       var accessRules = route.access;
       if ((accessRules.requiresLogin)){
@@ -59,7 +58,7 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
           if (accessRules.requiredPermissions!==undefined){
             var auth=false;
             for (var role in accessRules.requiredPermissions) {
-              if (role==userFactory.role_constants[userFactory.user.rol]) {
+              if (accessRules.requiredPermissions[role]==userFactory.role_constants[userFactory.user.rol]) {
                 auth=true;
               }
             }

@@ -240,7 +240,11 @@ app.run(function($location,$rootScope,$timeout,userFactory){
         }
         if (!userFactory.isLoggedIn()){
           $rootScope.showSidebar=false;
+        } else{
+          $rootScope.startNavbar = false;
+          $rootScope.startNavbar = true;
         }
+
       });
       if (!userFactory.isLoggedIn()){
         $rootScope.originalPath=$location.path();
@@ -248,6 +252,7 @@ app.run(function($location,$rootScope,$timeout,userFactory){
       } else {
         $rootScope.showSidebar=true;
       }
+      $rootScope.startNavbar = true;
     }
   });
   userFactory.initFactory();

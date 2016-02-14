@@ -115,10 +115,25 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
   $scope.initDashboard = function(){
     $rootScope.$watch($rootScope.showSidebar,function(){
       $scope.showSidebar = $rootScope.showSidebar;
+      if ($scope.showSidebar){
+        $scope.sidebar.items.forEach(function(item,index,ar){
+          if (item.hasSubitems){
+            item.subitems.forEach(function(subitem,index,ar){
+              subitem.visible = $scope.canView(subitem);
+            });
+          }
+          item.visible = $scope.canView(item);
+        });
+      }
     });
   };
 
-  $scope.initDashboard();
+  $rootScope.$watch('startNavbar',function(){
+    if ($rootScope.startNavbar){
+      $scope.initDashboard();
+      $rootScope.startNavbar=false;
+    }
+  });
 
   $scope.open = function (url){
     $location.path(url);
