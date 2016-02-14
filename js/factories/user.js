@@ -26,7 +26,7 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
     });
   };
 
-  userFactory.login = function(user, password,callback){
+  userFactory.login = function(user, password,success,error){
     var pass=
     usuario = {
       username:user,
@@ -35,9 +35,9 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
     $http.post($rootScope.serverUrl+'/user/login',"json="+JSON.stringify(usuario)).success(function(data){
       userFactory.user = data;
       userFactory.isLogged = true;
-      callback(userFactory.user);
-    }).error(function(error){
-      callback(false);
+      success(userFactory.user);
+    }).error(function(data){
+      error(data);
     });
   };
 

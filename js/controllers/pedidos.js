@@ -21,4 +21,8 @@ app.controller('PedidosController', function($scope,$rootScope,pedidosFactory,us
 
   };
 
+  $scope.initPedidosForTicket = function(){
+
+  };
+
 });
