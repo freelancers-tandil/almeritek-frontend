@@ -17,7 +17,7 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
     userFactory.checkServerLogin(function(data){
       userFactory.isLogged=true;
       $rootScope.isLogged=true;
-      userFactory.user=data;
+      userFactory.user=data.data;
       $rootScope.loadComplete=true;
     },function(data){
       userFactory.isLogged=false;
@@ -35,6 +35,7 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
     $http.post($rootScope.serverUrl+'/user/login',"json="+JSON.stringify(usuario)).success(function(data){
       userFactory.user = data;
       userFactory.isLogged = true;
+      $rootScope.isLogged=true;
       success(userFactory.user);
     }).error(function(data){
       error(data);
@@ -70,6 +71,10 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
       }
     }
     return true;
+  }
+
+  userFactory.hasRole = function(role){
+    return role==userFactory.role_constants[userFactory.user.rol];
   }
 
   userFactory.getAllUsuarios = function(callback){

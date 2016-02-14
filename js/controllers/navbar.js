@@ -36,7 +36,7 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
           ],
           is_open : false,
           restrictedAccess: true,
-          rolesRequired : ['TECH_ROLE']
+          rolesRequired : ['ADMIN_ROLE']
         },
         { id : 'tickets',
           text : 'Tickets',
@@ -106,8 +106,8 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
               icon : 'fa-list'
             }
           ],
-          restrictedAccess: false,
-          rolesRequired : ['TECH_ROLE']
+          restrictedAccess: true,
+          rolesRequired : ['ADMIN_ROLE']
         },
       ],
   };
@@ -127,6 +127,19 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
   $scope.logout = function(){
     userFactory.logout();
     $location.path("/login");
+  };
+
+  $scope.canView = function(menu){
+    if ((menu.restrictedAccess!=undefined)&&(menu.restrictedAccess)){
+      for (var role in menu.rolesRequired){
+          if (userFactory.hasRole(menu.rolesRequired[role])){
+            return true;
+          }
+      }
+      return false;
+    } else {
+      return true;
+    }
   };
 
 });

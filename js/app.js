@@ -32,7 +32,9 @@ app.config(function($routeProvider,$httpProvider){
   		templateUrl: 'views/clientes_listar.html',
     controller: 'ClientesController',
     access : {
-      requiresLogin: true
+      requiresLogin: true,
+      requiredPermissions: ['ADMIN_ROLE'],
+      permissionType: 'AtLeastOne'
     }
   });
 
@@ -156,6 +158,51 @@ app.config(function($routeProvider,$httpProvider){
 });
 
 app.run(function($location,$rootScope,$timeout,userFactory){
+
+  /*
+  * Definicion de constantes
+  */
+  $rootScope.notifications = {
+    list: [],
+    ERROR: 'error',
+    SUCCESS: 'success',
+    last_id: 0
+  };
+  $rootScope.constants = {
+    status: {
+      RECIBIDO: {code:0,text:"Recibido"},
+      PRESUPUESTADO: {code:1,text:"Presupuestado"},
+      ENCURSO: {code:2,text:"En Curso"},
+      REPARADO: {code:3,text:"Reparado"},
+      ENTREGADO: {code:4,text:"Entregado"},
+      CANCELADO: {code:5,text:"Cancelado"}
+    },
+    roles: {
+      ADMIN_ROLE: {code: 0, value: "ADMIN_ROLE"},
+      TECH_ROLE: {code: 1, value: "TECH_ROLE"}
+    }
+  };
+
+  /*
+  *  Metodos cross aplicacion
+  */
+  $rootScope.addNotification = function(type,text,time){
+    if (type===$rootScope.notifications.SUCCESS){
+      var index = $rootScope.successNotifications.push({id: $rootScope.notifications.last_id, message: text});
+      $rootScope.notifications.last_id++;
+      $timeout(function(){
+        $rootScope.successNotifications.splice(index-1,1);
+      },time);
+    } else if (type===$rootScope.notifications.ERROR){
+      var index = $rootScope.errorNotifications.push({id: $rootScope.notifications.last_id, message: text});
+      $rootScope.notifications.last_id++;
+      $timeout(function(){
+        $rootScope.errorNotifications.splice(index-1,1);
+      },time);
+    }
+  };
+
+
   $rootScope.serverUrl = 'http://localhost/almeritek-backend/index.php';
   $rootScope.isLogged=false;
   $rootScope.successNotifications = [];
@@ -186,8 +233,8 @@ app.run(function($location,$rootScope,$timeout,userFactory){
             if (!userFactory.isLoggedIn()){
               $location.path('/login');
             }else {
-              console.log(next);
-              $location.path('/unauthorized');
+              $rootScope.addNotification($rootScope.notifications.ERROR,"Usted no esta autorizado para acceder a esta funcion del sistema.",5000);
+              $location.path('/');
             }
           }
         }
@@ -204,41 +251,7 @@ app.run(function($location,$rootScope,$timeout,userFactory){
     }
   });
   userFactory.initFactory();
-  $rootScope.notifications = {
-    list: [],
-    ERROR: 'error',
-    SUCCESS: 'success',
-    last_id: 0
-  };
-  $rootScope.addNotification = function(type,text,time){
-    if (type===$rootScope.notifications.SUCCESS){
-      var index = $rootScope.successNotifications.push({id: $rootScope.notifications.last_id, message: text});
-      $rootScope.notifications.last_id++;
-      $timeout(function(){
-        $rootScope.successNotifications.splice(index-1,1);
-      },time);
-    } else if (type===$rootScope.notifications.ERROR){
-      var index = $rootScope.errorNotifications.push({id: $rootScope.notifications.last_id, message: text});
-      $rootScope.notifications.last_id++;
-      $timeout(function(){
-        $rootScope.errorNotifications.splice(index-1,1);
-      },time);
-    }
-  };
 
-  $rootScope.constants = {
-    status: {
-      RECIBIDO: {code:0,text:"Recibido"},
-      PRESUPUESTADO: {code:1,text:"Presupuestado"},
-      ENCURSO: {code:2,text:"En Curso"},
-      REPARADO: {code:3,text:"Reparado"},
-      ENTREGADO: {code:4,text:"Entregado"},
-      CANCELADO: {code:5,text:"Cancelado"}
-    },
-    roles: {
-      ADMIN_ROLE: {code: 0, value: "ADMIN_ROLE"},
-      TECH_ROLE: {code: 1, value: "TECH_ROLE"}
-    }
-  };
+
 
 });
