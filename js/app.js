@@ -87,6 +87,17 @@ app.config(function($routeProvider,$httpProvider){
   });
 
   $routeProvider
+  	.when('/config', {
+  		templateUrl: 'views/config.html',
+      controller: 'ConfigController',
+    access : {
+      requiresLogin: true,
+      requiredPermissions: ['ADMIN_ROLE'],
+      permissionType: 'AtLeastOne'
+    }
+  });
+
+  $routeProvider
     .when('/usuarios/agregar', {
       templateUrl: 'views/usuarios_agregar.html',
       controller: 'UsuariosController',

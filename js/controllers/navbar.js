@@ -105,6 +105,12 @@ app.controller('NavBarController', function($scope,$location,$rootScope,userFact
               route : '/usuarios/listar',
               hasIcon : true,
               icon : 'fa-list'
+            },
+            { id : 'sistema',
+              text : 'Sistema',
+              route : '/config',
+              hasIcon : true,
+              icon : 'fa-list'
             }
           ],
           restrictedAccess: true,
