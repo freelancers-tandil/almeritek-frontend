@@ -21,8 +21,8 @@
                     <td ng-init="editing[$index]=false" ng-show="!editing[$index]">{{item.valor}}</td>
                     <td ng-show="editing[$index]"><input type="text" ng-model="item.valor" ng-keypress="($event.which === 13)?saveItem($index):0"/></td>
                     <td>
-                      <div class="btn" href="" ng-show="!editing[$index]" ng-click="editing[$index]=true;oldValue[index]=item.valor"><span class="glyphicon glyphicon-pencil" title = "Editar ticket"></span></div>
-                      <div class="btn" href="" ng-show="editing[$index]" ng-click="saveItem($index)"><span class="glyphicon glyphicon-floppy-disk" title = "Guardar ticket"></span></div>
+                      <div class="btn" href="" ng-show="!editing[$index]" ng-click="editing[$index]=true;oldValue[index]=item.valor"><span class="glyphicon glyphicon-pencil" title = "Editar valor"></span></div>
+                      <div class="btn" href="" ng-show="editing[$index]" ng-click="saveItem($index)"><span class="glyphicon glyphicon-floppy-disk" title = "Guardar"></span></div>
                     </td>
                   </tr>
                 </table>
