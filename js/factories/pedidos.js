@@ -38,6 +38,16 @@ app.factory('pedidosFactory', [ '$http', '$rootScope', function($http,$rootScope
 
   };
 
+  
+
+  // pedidosFactory.getPedido=function(pedido, callback){
+  //   $http.get($rootScope.serverUrl + "/pedido/editar/"+pedido).success(function(data){
+  //     callback(data);
+  //   }).error(function(data){
+  //     callback(0);
+  //   });
+  // };
+
   return pedidosFactory;
 
 }]);
