@@ -26,6 +26,14 @@ app.factory('pedidosFactory', [ '$http', '$rootScope', function($http,$rootScope
     });
   };
 
+  pedidosFactory.getPedidosForLoggedUserAndTicket = function(ticketId,callback){
+    $http.get($rootScope.serverUrl + "/pedido/list_logged_for_ticket/"+ticketId).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
   pedidosFactory.addPedidoLoggedUser = function(pedido,ticketid,callback){
 
   };

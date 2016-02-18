@@ -11,6 +11,10 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.newTicket = {};
   $scope.editMode = false;
 
+  $scope.cantidadPaginas=1;
+  $scope.cantidadPorPagina=25;
+  $scope.paginaActual=1;
+
   $scope.clienteForTicket = $rootScope.newTicketClient;
   $scope.tecnicoForTicket = $rootScope.newTicketTecnico;
   $scope.tallerForTicket = $rootScope.newTicketTaller;
