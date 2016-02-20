@@ -79,10 +79,11 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">Cliente:</span>
-              <input type="text" class="form-control" placeholder="Cliente" aria-describedby="basic-addon1" ng-value="clienteForTicket.nombre + (clienteForTicket.apellido_1!==null ? ' ' + clienteForTicket.apellido_1 : '') + (clienteForTicket.apellido_2!==null ? ' ' + clienteForTicket.apellido_2 : '')" disabled >
-              <span class="input-group-btn">
+              <!-- <input type="text" class="form-control" placeholder="Cliente" aria-describedby="basic-addon1" ng-value="clienteForTicket.nombre + (clienteForTicket.apellido_1!==null ? ' ' + clienteForTicket.apellido_1 : '') + (clienteForTicket.apellido_2!==null ? ' ' + clienteForTicket.apellido_2 : '')" disabled >               -->
+              <input type="text" class="form-control" placeholder="Cliente" aria-describedby="basic-addon1" ng-model="clienteForTicket.nombre + (clienteForTicket.apellido_1!==null ? ' ' + clienteForTicket.apellido_1 : '') + (clienteForTicket.apellido_2!==null ? ' ' + clienteForTicket.apellido_2 : '')" disabled >
+              <!-- <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="toggleModal()"><span class="glyphicon glyphicon-search"></span></button>
-              </span>
+              </span> -->
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">

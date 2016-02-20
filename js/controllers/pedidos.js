@@ -1,10 +1,11 @@
 var app = angular.module('app');
 
-app.controller('PedidosController', function($scope,$rootScope,pedidosFactory,userFactory){
+app.controller('PedidosController', function($scope,$rootScope,$location,pedidosFactory,userFactory){
 
   $scope.loggedUser = null;
   // $scope.editMode = false;
   $scope.pedidos = [];
+  $scope.showPedidoModal = false;
 
 
   // if ($location.path()=='/pedidos/editar'){
@@ -53,6 +54,9 @@ app.controller('PedidosController', function($scope,$rootScope,pedidosFactory,us
     }
   };
 
+  $scope.togglePedidoModal = function(){
+    $scope.showPedidoModal = !$scope.showPedidoModal;
+  };
   // $scope.editarPedido = function(pedido){
   //   $rootScope.editPedido=pedido;
   //   $location.path('/pedidos/editar');

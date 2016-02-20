@@ -20,7 +20,7 @@
             <div class="form-group">
               <div class="input-group" ng-class="{'has-error': !clientes.$pristine && clientes.Nombre.$error.required}">
                 <span class="input-group-addon" id="basic-addon1">Nombre:</span>
-                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-describedby="basic-addon1" ng-model="newClient.nombre" required/>
+                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-describedby="basic-addon1" ng-model="newClient.nombre + newClient.apellido_1" required/>
 
               </div>
               <span ng-show="!clientes.$pristine && clientes.Nombre.$error.required">El campo es obligatorio.</span>

@@ -159,6 +159,16 @@ app.config(function($routeProvider,$httpProvider){
         requiresLogin: true
       }
     });
+
+    $routeProvider
+      .when('/pedidos/agregar', {
+        templateUrl: 'views/pedidos_agregar.html',
+      controller: 'PedidosController',
+      access : {
+        requiresLogin: true
+      }
+    });
+
     $routeProvider
      .when('/tickets/ver', {
        templateUrl: 'views/tickets_ver.html',

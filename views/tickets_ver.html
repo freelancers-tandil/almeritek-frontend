@@ -81,7 +81,7 @@
           <span class="input-group-addon" id="basic-addon1">Busqueda:</span>
           <input type="text" class="form-control" placeholder="Dato..." aria-describedby="basic-addon1" ng-model="search_data">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button" ng-click="crearPedidoTicket(pedido)"><span class="glyphicon glyphicon-plus"> Agregar pedido</span></button>
+            <button class="btn btn-default" type="button" ng-click="togglePedidoModal()"><span class="glyphicon glyphicon-plus"> Agregar pedido</span></button>
           </span>
         </div>
       </div>
@@ -113,8 +113,8 @@
                 <td>{{pedido.precio}}</td>
                 <td>{{$parent.newTicket.num_ticket}}</td>
                 <td>
-                  <div class="btn" href="" ng-click="editarTicket(ticket)"><span class="glyphicon glyphicon-pencil" title = "Editar ticket"></span></div>
-                  <div class="btn" href="" ng-click="deleteTicket($index)"><span class="glyphicon glyphicon-trash" title = "Eliminar ticket"></span></div>
+                  <div class="btn" href="" ng-click="editarPedido(pedido)"><span class="glyphicon glyphicon-pencil" title = "Editar pedido"></span></div>
+                  <div class="btn" href="" ng-click="deletePedido($index)"><span class="glyphicon glyphicon-trash" title = "Eliminar pedido"></span></div>
                 </td>
               </tr>
             </table>
@@ -124,3 +124,80 @@
     </div>
   </div>
 </div>
+
+
+<client-modal title="Agregar pedido" visible="showPedidoModal">
+  <div ng-controller= "PedidosController">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Agregar pedido</h1>
+      </div>
+    </div>
+    <div class="row">
+        <form id="pedido-add" name="pedido">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="input-group" ng-class="{'has-error': !pedido.$pristine && pedido.descripcion.$error.required}">
+                <span class="input-group-addon" id="basic-addon1">Descripción:</span>
+                <input type="text" name="descripcion" class="form-control" placeholder="Descripcion" aria-describedby="basic-addon1" ng-model="newPedido.descripcion" required />
+              </div>
+              <span ng-show="!pedido.$pristine && pedido.descripcion.$error.required">El campo es obligatorio.</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" ng-controller="DatepickerController">
+              <div class="input-group date" ng-class="{'has-error': !pedido.$pristine && pedido.fecha.$error.required}">
+                <span class="input-group-addon" id="basic-addon1">Fecha de pedido:</span>
+                <input type="text" name="fecha" class="form-control"  uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newTicket.fecha_pedido" required/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>
+              <span ng-show="!pedido.$pristine && pedido.fecha.$error.required">El campo es obligatorio.</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="input-group" ng-class="{'has-error': !pedido.$pristine && pedido.link.$error.required}">
+                <span class="input-group-addon" id="basic-addon1">Link:</span>
+                <input type="text" name="link" class="form-control" placeholder="Link" aria-describedby="basic-addon1" ng-model="newPedido.link" required>
+              </div>
+              <span ng-show="!pedido.$pristine && pedido.link.$error.required">El campo es obligatorio.</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="input-group" ng-class="{'has-error': !pedido.$pristine && pedido.proveedor.$error.required}">
+                <span class="input-group-addon" id="basic-addon1">Proveedor:</span>
+                <input type="text" class="form-control" placeholder="Proveedor" aria-describedby="basic-addon1" ng-model="newPedido.proveedor" required>
+              </div>
+              <span ng-show="!pedido.$pristine && pedido.proveedor.$error.required">El campo es obligatorio.</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Precio:</span>
+                <input type="text" class="form-control" placeholder="10.00" aria-describedby="basic-addon1" ng-model="newPedido.precio">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="input-group" >
+                <span class="input-group-addon" id="basic-addon1">Ticket:</span>
+                <input type="text" class="form-control" placeholder="Ticket" aria-describedby="basic-addon1" ng-model="newTicket.num_ticket" >
+                <!-- <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="toggleModal()"><span class="glyphicon glyphicon-search"></span></button>
+                </span> -->
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" ng-controller="DatepickerController">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Fecha entrega:</span>
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newPedido.fecha_entrega">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+  </div>
+</client-modal>
