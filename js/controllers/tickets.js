@@ -26,6 +26,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.showTecnicoModal = false;
   $scope.showTallerModal = false;
   $scope.showEstadoModal = false;
+  $scope.showPedidoModal = false;
   $scope.estados =[];
   $scope.ticket =[];
 
@@ -154,6 +155,10 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.toggleEstadoModal = function(){
     $scope.showEstadoModal = !$scope.showEstadoModal;
 
+  };
+
+  $scope.togglePedidoModal = function(){
+    $scope.showPedidoModal = !$scope.showPedidoModal;
   };
 
   $scope.setCliente = function(cliente){

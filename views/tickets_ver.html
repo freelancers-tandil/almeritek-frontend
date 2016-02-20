@@ -127,11 +127,11 @@
 
 
 <client-modal title="Agregar pedido" visible="showPedidoModal">
-  <div ng-controller= "PedidosController">
+  <div>
     <div class="row">
-      <div class="col-lg-12">
+      <!-- <div class="col-lg-12">
         <h1 class="page-header">Agregar pedido</h1>
-      </div>
+      </div> -->
     </div>
     <div class="row">
         <form id="pedido-add" name="pedido">
@@ -182,7 +182,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="input-group" >
                 <span class="input-group-addon" id="basic-addon1">Ticket:</span>
-                <input type="text" class="form-control" placeholder="Ticket" aria-describedby="basic-addon1" ng-model="newTicket.num_ticket" >
+                <input type="text" class="form-control" placeholder="Ticket" aria-describedby="basic-addon1" ng-model="newTicket.num_ticket" disabled>
                 <!-- <span class="input-group-btn">
                   <button class="btn btn-default" type="button" ng-click="toggleModal()"><span class="glyphicon glyphicon-search"></span></button>
                 </span> -->

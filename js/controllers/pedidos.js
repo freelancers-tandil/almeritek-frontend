@@ -5,7 +5,6 @@ app.controller('PedidosController', function($scope,$rootScope,$location,pedidos
   $scope.loggedUser = null;
   // $scope.editMode = false;
   $scope.pedidos = [];
-  $scope.showPedidoModal = false;
 
 
   // if ($location.path()=='/pedidos/editar'){
@@ -54,9 +53,6 @@ app.controller('PedidosController', function($scope,$rootScope,$location,pedidos
     }
   };
 
-  $scope.togglePedidoModal = function(){
-    $scope.showPedidoModal = !$scope.showPedidoModal;
-  };
   // $scope.editarPedido = function(pedido){
   //   $rootScope.editPedido=pedido;
   //   $location.path('/pedidos/editar');
