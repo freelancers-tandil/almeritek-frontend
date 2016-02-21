@@ -3,8 +3,8 @@
     <div class="col-lg-12">
         <h1 class="page-header">
           Información del Ticket
-        <div class="btn-group actions" ng-init="estadoForButtons=newTicket.estado">
-          <label class="btn btn-primary" ng-repeat="estado in getAllEstados()" ng-model="estadoForButtons" ng-click="changeStatus(estado.code)" uib-btn-radio="'{{estado.code}}'">{{estado.text}}</label>
+        <div class="btn-group actions">
+          <label class="btn btn-primary" ng-repeat="estado in getAllEstados()" ng-model="newTicket.estado" uib-btn-radio="'{{estado.code}}'">{{estado.text}}</label>
         </div>
         </h1>
     </div>

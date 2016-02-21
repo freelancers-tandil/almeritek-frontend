@@ -19,15 +19,13 @@
         <div class="table-responsive" ng-init="initPagedList()">
           <table class="table table-striped table-condensed table-hover" style="width:100%">
             <tr>
-              <th>Numero ticket</th>
+              <th># ticket</th>
               <th>Fecha</th>
               <th>Taller</th>
               <th>Equipo</th>
               <th>Modelo</th>
               <th>Marca</th>
-              <th>Imei</th>
               <th>Cliente</th>
-              <th>Costo de reparación</th>
               <th>Usuario</th>
               <th>Avisado</th>
               <th>Estado</th>
@@ -37,17 +35,15 @@
             </tr>
             <tr ng-repeat="ticket in tickets">
               <td>{{ticket.num_ticket}}</td>
-              <td>{{ticket.fecha}}</td>
+              <td>{{ticket.fecha|split:' ':0}}</td>
               <td>{{ticket.nombre_taller}}</td>
               <td>{{ticket.equipo}}</td>
               <td>{{ticket.modelo}}</td>
               <td>{{ticket.marca}}</td>
-              <td>{{ticket.imei}}</td>
               <td>{{(ticket.nombre_cliente!=null ? ' ' + ticket.nombre_cliente : '') + (ticket.apellido_1_cliente!=null ? ' ' + ticket.apellido_1_cliente : '') + (ticket.apellido_2_cliente!=null ? ' ' + ticket.apellido_2_cliente : '')}}</td>
-              <td>{{ticket.costo_reparacion}}</td>
               <td>{{(ticket.nombre_usuario!=null ? ticket.nombre_usuario:'') + (ticket.apellido_usuario!=null ? ' ' + ticket.apellido_usuario:'')}}</td>
               <td>{{ticket.avisado}}</td>
-              <td>{{ticket.estado}}</td>
+              <td>{{estados[ticket.estado].text}}</td>
               <td>
                 <div class="btn" href="" ng-click="verTicket(ticket)"><span class="glyphicon glyphicon-eye-open" title ="Ver ticket"></span></div>
                 <div class="btn" href="" ng-click="editarTicket(ticket)"><span class="glyphicon glyphicon-pencil" title = "Editar ticket"></span></div>

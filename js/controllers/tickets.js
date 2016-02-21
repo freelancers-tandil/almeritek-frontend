@@ -31,7 +31,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.estados =[];
   $scope.ticket =[];
 
-  $scope.estadoForButtons = {};
+  $scope.estadoForButtons = 0;
 
 
   if ($location.path()=='/tickets/editar'){
@@ -51,6 +51,17 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
    $scope.editMode = false;
    if ($rootScope.ver_Ticket!==undefined){
      $scope.newTicket=$rootScope.ver_Ticket;
+     $scope.estadoForButtons=$scope.newTicket.estado;
+     $scope.$watch('newTicket.estado',function(newValue,oldValue){
+       if (oldValue != newValue){
+         ticketFactory.saveTicket($scope.newTicket,function(data){
+           $rootScope.addNotification($rootScope.notifications.SUCCESS,"Estado de ticket " + $scope.newTicket.num_ticket + " cambiado a " + $scope.estados[newValue].text + " con exito.",5000);
+         },function(data){
+           $scope.newTicket.estado = oldValue;
+           $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
+         });
+       }
+     });
    } else {
      $location.path('/');
    }
@@ -190,6 +201,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.$on('$viewContentLoaded', function(){
     $tallerSelect = $("#userSelect").select2();
     checkedStatus=$scope.newTicket.estado;
+    $scope.getAllEstados();
   });
 
   $scope.initPagedList = function(){
@@ -245,16 +257,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   }
 
   $scope.changeStatus = function(newStatus){
-    var oldStatus = $scope.newTicket.estado;
-    $scope.newTicket.estado = newStatus;
-    ticketFactory.saveTicket($scope.newTicket,function(data){
-      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Estado de ticket " + $scope.newTicket.num_ticket + " cambiado a " + $scope.estados[$scope.estadoForButtons].text + " con exito.",5000);
-      $scope.estadoForButtons=newStatus;
-    },function(data){
-      $scope.newTicket.estado = oldStatus;
-      $scope.estadoForButtons=oldStatus;
-      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
-    });
+
   }
 
 });

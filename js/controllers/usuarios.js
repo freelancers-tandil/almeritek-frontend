@@ -26,7 +26,6 @@ app.controller('UsuariosController',function($scope,$location,$rootScope,$timeou
   $scope.getAllUsuarios = function(){
     userFactory.getAllUsuarios(function(data){
       $scope.usuarios=data;
-      console.log($scope.usuarios);
     });
   };
 
