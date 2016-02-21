@@ -355,3 +355,6 @@ table.dataTable thead .sorting:after {
 form .row {
   margin: 5px;
 }
+.page-header div.actions {
+  float: right;
+}

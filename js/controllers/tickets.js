@@ -10,6 +10,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.es_empresa = false;
   $scope.newTicket = {};
   $scope.editMode = false;
+  $scope.checkedStatus = 0;
 
   $scope.cantidadPaginas=1;
   $scope.cantidadPorPagina=25;
@@ -30,7 +31,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.estados =[];
   $scope.ticket =[];
 
-
+  $scope.estadoForButtons = {};
 
 
   if ($location.path()=='/tickets/editar'){
@@ -178,7 +179,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.getAllEstados = function(){
     var aux= $rootScope.constants.status;
     $scope.estados=[aux.RECIBIDO, aux.PRESUPUESTADO, aux.ENCURSO, aux.REPARADO,aux.ENTREGADO, aux.CANCELADO];
-
+    return $scope.estados;
   }
 
   $scope.setEstado = function(estado){
@@ -188,6 +189,7 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
 
   $scope.$on('$viewContentLoaded', function(){
     $tallerSelect = $("#userSelect").select2();
+    checkedStatus=$scope.newTicket.estado;
   });
 
   $scope.initPagedList = function(){
@@ -234,5 +236,25 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
       });
     }
   };
+
+  $scope.initEstados = function(){
+    var estados = $scope.getAllEstados();
+    for (var estado in estados) {
+      $scope.checkEstados[estados[estado].code]=$scope.newTicket.estado==estados[estado].code;
+    }
+  }
+
+  $scope.changeStatus = function(newStatus){
+    var oldStatus = $scope.newTicket.estado;
+    $scope.newTicket.estado = newStatus;
+    ticketFactory.saveTicket($scope.newTicket,function(data){
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Estado de ticket " + $scope.newTicket.num_ticket + " cambiado a " + $scope.estados[$scope.estadoForButtons].text + " con exito.",5000);
+      $scope.estadoForButtons=newStatus;
+    },function(data){
+      $scope.newTicket.estado = oldStatus;
+      $scope.estadoForButtons=oldStatus;
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
+    });
+  }
 
 });
