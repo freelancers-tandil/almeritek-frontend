@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.controller('PedidosController', function($scope,$rootScope,$location,pedidosFactory,userFactory){
+app.controller('PedidosController', function($scope,$rootScope,$location,pedidosFactory,userFactory, ticketFactory){
 
   $scope.loggedUser = null;
   // $scope.editMode = false;
@@ -55,7 +55,7 @@ app.controller('PedidosController', function($scope,$rootScope,$location,pedidos
 
   $scope.addPedido = function(ticketId){
     $scope.newPedido.ticket = ticketId;
-    ticketFactory.addTicket($scope.newPedido,function(data){
+    pedidosFactory.addPedido($scope.newPedido,function(data){
       $scope.newPedido = {};
       $rootScope.addNotification($rootScope.notifications.SUCCESS,"Pedido agregado con exito.",5000);
     },function(data){
