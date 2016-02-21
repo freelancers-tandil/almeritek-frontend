@@ -53,6 +53,16 @@ app.controller('PedidosController', function($scope,$rootScope,$location,pedidos
     }
   };
 
+  $scope.addPedido = function(ticketId){
+    $scope.newPedido.ticket = ticketId;
+    ticketFactory.addTicket($scope.newPedido,function(data){
+      $scope.newPedido = {};
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Pedido agregado con exito.",5000);
+    },function(data){
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
+    });
+  };
+
   // $scope.editarPedido = function(pedido){
   //   $rootScope.editPedido=pedido;
   //   $location.path('/pedidos/editar');

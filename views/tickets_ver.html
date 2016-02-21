@@ -140,7 +140,7 @@
         <h1 class="page-header">Agregar pedido</h1>
       </div> -->
     </div>
-    <div class="row">
+    <div class="row" ng-controller="PedidosController">
         <form id="pedido-add" name="pedido">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -203,6 +203,11 @@
                   <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
               </div>
+            </div>
+          </div>
+          <div class="row" ng-show="!editMode">
+            <div class="col-lg-12">
+              <button type="button" class="btn btn-success" ng-click="addPedido(newTicket.id)" ng-disabled="!clientes.$valid">Agregar</button>
             </div>
           </div>
 

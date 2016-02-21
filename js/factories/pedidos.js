@@ -38,7 +38,14 @@ app.factory('pedidosFactory', [ '$http', '$rootScope', function($http,$rootScope
 
   };
 
-  
+
+  pedidosFactory.addPedido = function(pedido,success,error){
+    $http.post($rootScope.serverUrl+"/pedido","json="+JSON.stringify(pedido)).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
 
   // pedidosFactory.getPedido=function(pedido, callback){
   //   $http.get($rootScope.serverUrl + "/pedido/editar/"+pedido).success(function(data){
