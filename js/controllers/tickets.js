@@ -190,4 +190,49 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     $tallerSelect = $("#userSelect").select2();
   });
 
+  $scope.initPagedList = function(){
+    ticketFactory.getCantidadTickets(function(data){
+      aux = ((data / $scope.cantidadPorPagina)|0);
+      aux < (data/$scope.cantidadPorPagina) ? $scope.cantidadPaginas = (aux+1) : $scope.cantidadPaginas=aux;
+    });
+    ticketFactory.getPagedTickets(1,$scope.cantidadPorPagina,function(data){
+      $scope.tickets=data;
+    });
+  };
+
+  $scope.loadPage = function(page){
+    if ($scope.search_data==""){
+      ticketFactory.getPagedTickets(page,$scope.cantidadPorPagina,function(data){
+        $scope.paginaActual=page;
+        $scope.tickets=data;
+      });
+    } else {
+      ticketFactory.searchTickets($scope.search_data,page,$scope.cantidadPorPagina,function(data){
+        $scope.paginaActual=page;
+        $scope.tickets=data;
+      });
+    }
+  };
+
+  $scope.getPages = function(){
+    return new Array($scope.cantidadPaginas);
+  };
+
+
+  $scope.updateSearch = function(){
+    if ($scope.search_data==""){
+      $scope.initPagedList();
+    } else {
+      ticketFactory.searchCantidadTickets($scope.search_data,function(data){
+        aux = ((data / $scope.cantidadPorPagina)|0);
+        aux < (data/$scope.cantidadPorPagina) ? $scope.cantidadPaginas = (aux+1) : $scope.cantidadPaginas=aux;
+      });
+      ticketFactory.searchTickets($scope.search_data,1,$scope.cantidadPorPagina,function(data){
+        $scope.paginaActual=1;
+        $scope.tickets=data;
+
+      });
+    }
+  };
+
 });

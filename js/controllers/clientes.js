@@ -12,7 +12,7 @@ app.controller('ClientesController',function($scope,$rootScope,$timeout,$locatio
   $scope.cantidadPaginas=1;
   $scope.cantidadPorPagina=25;
   $scope.paginaActual=1;
-  $scope.ticketsCliente =[]; 
+  $scope.ticketsCliente =[];
 
   if ($location.path()=='/clientes/editar'){
     $scope.editMode = true;

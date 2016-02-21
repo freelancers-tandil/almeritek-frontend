@@ -58,6 +58,59 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
     });
   };
 
+
+  ticketFactory.getPagedTickets = function(page,amount,callback){
+    $http.get($rootScope.serverUrl + "/ticket/paginado/"+page+"/"+amount).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+  ticketFactory.searchTickets = function(data,page,cantidad,callback){
+    ticket = {
+      num_ticket: data,
+      fecha: data,
+      equipo: data,
+      modelo: data,
+      marca: data,
+      imei: data,
+      cliente: data,
+      costo_reparacion: data,
+      tecnico: data,
+      avisado: data,
+      estado: data
+    };
+    $http.get($rootScope.serverUrl + "/ticket/search/"+page+"/"+cantidad+"?json="+JSON.stringify(ticket)).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+  ticketFactory.searchCantidadTickets = function(data,callback){
+    ticket = {
+      num_ticket: data,
+      fecha: data,
+      equipo: data,
+      modelo: data,
+      marca: data,
+      imei: data,
+      cliente: data,
+      costo_reparacion: data,
+      tecnico: data,
+      avisado: data,
+      estado: data
+    };
+    console.log(ticket);
+    $http.get($rootScope.serverUrl + "/ticket/searchcantidad?json="+JSON.stringify(ticket)).success(function(data){
+      callback(data.cantidad);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+
   return ticketFactory;
 
 }]);
