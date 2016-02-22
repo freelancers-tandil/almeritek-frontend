@@ -69,6 +69,7 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
 
   ticketFactory.searchTickets = function(data,page,cantidad,callback){
     ticket = {
+      taller: data,
       num_ticket: data,
       fecha: data,
       equipo: data,
@@ -90,6 +91,7 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
 
   ticketFactory.searchCantidadTickets = function(data,callback){
     ticket = {
+      taller: data,
       num_ticket: data,
       fecha: data,
       equipo: data,
