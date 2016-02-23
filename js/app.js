@@ -161,7 +161,7 @@ app.config(function($routeProvider,$httpProvider){
     });
 
     $routeProvider
-      .when('/pedidos/agregar', {
+      .when('/pedidos/editar', {
         templateUrl: 'views/pedidos_agregar.html',
       controller: 'PedidosController',
       access : {

@@ -47,13 +47,83 @@ app.factory('pedidosFactory', [ '$http', '$rootScope', function($http,$rootScope
     });
   };
 
-  // pedidosFactory.getPedido=function(pedido, callback){
-  //   $http.get($rootScope.serverUrl + "/pedido/editar/"+pedido).success(function(data){
-  //     callback(data);
-  //   }).error(function(data){
-  //     callback(0);
-  //   });
-  // };
+  pedidosFactory.deletePedido = function(pedido,success,error){
+    //"json="+JSON.stringify(cliente)
+    $http({
+      method: 'DELETE',
+      url: $rootScope.serverUrl+"/pedido",
+      data: JSON.stringify(pedido)
+    }).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
+  pedidosFactory.getCantidadPedidos = function(callback){
+    $http.get($rootScope.serverUrl + "/pedido/cantidad").success(function(data){
+      callback(data.cantidad);
+    }).error(function(data){
+      callback(0);
+    });
+  };
+
+  pedidosFactory.getPagedPedidos = function(page,amount,callback){
+    $http.get($rootScope.serverUrl + "/pedido/paginado/"+page+"/"+amount).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+  pedidosFactory.searchPedidos = function(data,page,cantidad,callback){
+    pedido = {
+      descripcion: data,
+      link: data,
+      fecha_pedido: data,
+      proveedor: data,
+      fecha_entrega: data,
+      precio: data
+    };
+    $http.get($rootScope.serverUrl + "/pedido/search/"+page+"/"+cantidad+"?json="+JSON.stringify(pedido)).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+  pedidosFactory.searchCantidadPedidos = function(data,callback){
+    pedido = {
+      descripcion: data,
+      link: data,
+      fecha_pedido: data,
+      proveedor: data,
+      fecha_entrega: data,
+      precio: data
+    };
+    console.log(pedido);
+    $http.get($rootScope.serverUrl + "/pedido/searchcantidad?json="+JSON.stringify(pedido)).success(function(data){
+      callback(data.cantidad);
+    }).error(function(data){
+      callback([]);
+    });
+  };
+
+
+  pedidosFactory.getPedido=function(pedido, callback){
+    $http.get($rootScope.serverUrl + "/pedido/pedido/"+pedido).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback(0);
+    });
+  };
+
+  pedidosFactory.savePedido = function(pedido,success,error){
+    $http.put($rootScope.serverUrl+"/pedido","json="+JSON.stringify(pedido)).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
 
   return pedidosFactory;
 

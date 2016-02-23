@@ -1,7 +1,7 @@
 <div id="page-wrapper" class="container-fluid" ng-cloak>
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Agregar pedido</h1>
+      <h1 class="page-header">Editar pedido</h1>
     </div>
   </div>
   <div class="row">
@@ -19,7 +19,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12" ng-controller="DatepickerController">
             <div class="input-group date" ng-class="{'has-error': !pedido.$pristine && pedido.fecha.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Fecha de pedido:</span>
-              <input type="text" name="fecha" class="form-control"  uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newTicket.fecha_pedido" required/>
+              <input type="text" name="fecha" class="form-control"  uib-datepicker-popup="{{format}}"  is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newTicket.fecha_pedido">
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
@@ -53,7 +53,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group" >
               <span class="input-group-addon" id="basic-addon1">Ticket:</span>
-              <input type="text" class="form-control" placeholder="Ticket" aria-describedby="basic-addon1" ng-model="newTicket.num_ticket" >
+              <input type="text" class="form-control" placeholder="Ticket" aria-describedby="basic-addon1" ng-model="newPedido.num_ticket" disabled >
               <!-- <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="toggleModal()"><span class="glyphicon glyphicon-search"></span></button>
               </span> -->
@@ -62,21 +62,21 @@
           <div class="col-lg-6 col-md-6 col-sm-12" ng-controller="DatepickerController">
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">Fecha entrega:</span>
-              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newPedido.fecha_entrega">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newPedido.fecha_entrega">
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </div>
           </div>
         </div>
-        <div class="row" ng-show="!editMode">
+        <!-- <div class="row" ng-show="!editMode">
           <div class="col-lg-12">
             <button type="button" class="btn btn-success" ng-click="addTicket()" ng-disabled="!ticket.$valid">Agregar</button>
           </div>
-        </div>
+        </div> -->
         <div class="row" ng-show="editMode">
           <div class="col-lg-12">
-            <button type="button" class="btn btn-success"   ng-click="saveTicket()">Guardar</button>
+            <button type="button" class="btn btn-success"   ng-click="savePedido()">Guardar</button>
           </div>
         </div>
     </form>

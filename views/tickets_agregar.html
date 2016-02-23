@@ -17,7 +17,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12" ng-controller="DatepickerController">
             <div class="input-group date" ng-class="{'has-error': !ticket.$pristine && ticket.fecha.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Fecha:</span>
-              <input type="text" name="fecha" class="form-control"  uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newTicket.fecha" required/>
+              <input type="text" name="fecha" class="form-control"  uib-datepicker-popup="{{format}}"  is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newTicket.fecha" required/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
