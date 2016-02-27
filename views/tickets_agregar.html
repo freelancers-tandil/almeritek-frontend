@@ -14,7 +14,7 @@
             </div>
             <span ng-show="!ticket.$pristine && ticket.numTicket.$error.required">El campo es obligatorio.</span>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-12" ng-controller="DatepickerController">
+          <div class="col-lg-6 col-md-6 col-sm-12" ng-controller="DatepickerController" >
             <div class="input-group date" ng-class="{'has-error': !ticket.$pristine && ticket.fecha.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Fecha:</span>
               <input type="text" name="fecha" class="form-control"  uib-datepicker-popup="{{format}}"  is-open="popup1.opened" placeholder="YYYY-MM-DD" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" aria-describedby="basic-addon1" ng-model="newTicket.fecha" required/>
@@ -29,7 +29,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group" ng-class="{'has-error': !ticket.$pristine && ticket.talle.$error.required}">
               <span class="input-group-addon" id="basic-addon1">Taller:</span>
-              <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" ng-value="tallerForTicket.nombre" disabled >
+              <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" ng-value="newTicket.nombre_taller" disabled >
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="toggleTallerModal()"><span class="glyphicon glyphicon-search"></span></button>
               </span>
@@ -65,9 +65,9 @@
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="input-group">
+            <div class="input-group" ng-init="getAllEstados()">
               <span class="input-group-addon" id="basic-addon1">Estado:</span>
-              <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="estadoForTicket.text" disabled>
+              <input type="text" class="form-control" aria-describedby="basic-addon1" ng-value="estados[newTicket.estado].text" disabled>
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="toggleEstadoModal()" ><span class="glyphicon glyphicon-search"></span></button>
               </span>
@@ -79,11 +79,10 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">Cliente:</span>
-              <!-- <input type="text" class="form-control" placeholder="Cliente" aria-describedby="basic-addon1" ng-value="clienteForTicket.nombre + (clienteForTicket.apellido_1!==null ? ' ' + clienteForTicket.apellido_1 : '') + (clienteForTicket.apellido_2!==null ? ' ' + clienteForTicket.apellido_2 : '')" disabled >               -->
-              <input type="text" class="form-control" placeholder="Cliente" aria-describedby="basic-addon1" ng-model="clienteForTicket.nombre + (clienteForTicket.apellido_1!==null ? ' ' + clienteForTicket.apellido_1 : '') + (clienteForTicket.apellido_2!==null ? ' ' + clienteForTicket.apellido_2 : '')" disabled >
-              <!-- <span class="input-group-btn">
+              <input type="text" class="form-control" placeholder="Cliente" aria-describedby="basic-addon1" ng-value="clienteForTicket.nombre + (clienteForTicket.apellido_1!==null ? ' ' + clienteForTicket.apellido_1 : '') + (clienteForTicket.apellido_2!==null ? ' ' + clienteForTicket.apellido_2 : '')" disabled >
+              <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="toggleModal()"><span class="glyphicon glyphicon-search"></span></button>
-              </span> -->
+              </span>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">

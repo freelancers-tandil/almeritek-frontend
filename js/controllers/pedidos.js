@@ -14,9 +14,8 @@ app.controller('PedidosController', function($scope,$rootScope,$location,pedidos
   if ($location.path()=='/pedidos/editar'){
     $scope.editMode = true;
     if ($rootScope.editPedido!==undefined){
-      pedidosFactory.getPedido($scope.editPedido.id,function(data){
+      pedidosFactory.getPedido($rootScope.editPedido.id,function(data){
         $scope.pedidoForTicket = data;
-        console.log("es el data" + " " + $scope.editPedido.id);
         console.log(data);
       });
      $scope.newPedido=$rootScope.editPedido;
@@ -136,7 +135,6 @@ app.controller('PedidosController', function($scope,$rootScope,$location,pedidos
 
   $scope.editarPedido = function(pedido){
     $rootScope.editPedido=pedido;
-    console.log(pedido);
     $location.path('/pedidos/editar');
   };
 

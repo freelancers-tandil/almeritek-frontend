@@ -37,9 +37,14 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   if ($location.path()=='/tickets/editar'){
     $scope.editMode = true;
     if ($rootScope.editTicket!==undefined){
-      clienteFactory.getCliente($scope.editTicket.cliente,function(data){
+      clienteFactory.getCliente($rootScope.editTicket.cliente,function(data){
         $scope.clienteForTicket = data;
-        console.log(data);
+      });
+      tallerFactory.getTaller($rootScope.editTicket.taller,function(data){
+        $scope.tallerForTicket = data;
+      });
+      userFactory.getUser($rootScope.editTicket.tecnico,function(data){
+        $scope.tecnicoForTicket = data;
       });
      $scope.newTicket=$rootScope.editTicket;
     } else {

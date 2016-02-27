@@ -10,7 +10,10 @@ app.controller('DatepickerController', function ($scope) {
     $scope.dt = null;
   };
 
-
+$scope.hoy = function(ticket){
+  if(ticket.fecha == undefined || ticket.fecha == null)
+    ticket.fecha=$scope.today();
+};
   // Disable weekend selection
   $scope.disabled = function(date, mode) {
     return mode === 'day' && (date.getDay() === 0 );//|| date.getDay() === 6);

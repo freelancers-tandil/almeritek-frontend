@@ -84,6 +84,15 @@ app.factory('userFactory', [ '$http', '$rootScope', '$location', 'md5', function
     });
   };
 
+  userFactory.getUser=function(user, callback){
+    $http.get($rootScope.serverUrl + "/user/user/"+user).success(function(data){
+      callback(data);
+    }).error(function(data){
+      callback(0);
+    });
+  };
+
+
   userFactory.addUsuario = function(user,success,error){
     user.password = md5.createHash(user.password);
     $http.post($rootScope.serverUrl+"/user","json="+JSON.stringify(user)).success(function(data){
