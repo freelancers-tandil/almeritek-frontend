@@ -59,8 +59,8 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
   };
 
 
-  ticketFactory.getPagedTickets = function(page,amount,callback){
-    $http.get($rootScope.serverUrl + "/ticket/paginado/"+page+"/"+amount).success(function(data){
+  ticketFactory.getPagedTickets = function(page,amount,estados,callback){
+    $http.get($rootScope.serverUrl + "/ticket/paginado/"+page+"/"+amount+"?estados="+JSON.stringify(estados)).success(function(data){
       callback(data);
     }).error(function(data){
       callback([]);
@@ -82,7 +82,7 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
       avisado: data,
       estado: data
     };
-    $http.get($rootScope.serverUrl + "/ticket/search/"+page+"/"+cantidad+"?json="+JSON.stringify(ticket)).success(function(data){
+    $http.get($rootScope.serverUrl + "/ticket/search/"+page+"/"+cantidad+"?json="+JSON.stringify(ticket)+"?estados="+JSON.stringify(estados)).success(function(data){
       callback(data);
     }).error(function(data){
       callback([]);

@@ -19,7 +19,16 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
   $scope.clienteForTicket = $rootScope.newTicketClient;
   $scope.tecnicoForTicket = $rootScope.newTicketTecnico;
   $scope.tallerForTicket = $rootScope.newTicketTaller;
-  $scope.estadoForTicket = $rootScope.newTicketEstado;
+  $scope.estadoForTicket = $rootScope.newTicketEstado
+
+  $scope.recibido = true;
+  $scope.presupuestado = true;
+  $scope.encurso = true;
+  $scope.reparado = false;
+  $scope.entregado = false;
+  $scope.cancelado = false;
+  // console.log($scope.cancelado);
+
 
   $scope.talleres = [];
   $scope.showModal = false;
@@ -214,7 +223,26 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
       aux = ((data / $scope.cantidadPorPagina)|0);
       aux < (data/$scope.cantidadPorPagina) ? $scope.cantidadPaginas = (aux+1) : $scope.cantidadPaginas=aux;
     });
-    ticketFactory.getPagedTickets(1,$scope.cantidadPorPagina,function(data){
+    var estados = [];
+    if($scope.recibido){
+      estados.push(0);
+    }
+    if($scope.presupuestado){
+      estados.push(1);
+    }
+    if($scope.encurso){
+      estados.push(2);
+    }
+    if($scope.reparado){
+      estados.push(3);
+    }
+    if($scope.entregado){
+      estados.push(4);
+    }
+    if($scope.cancelado){
+      estados.push(5);
+    }
+    ticketFactory.getPagedTickets(1,$scope.cantidadPorPagina,estados,function(data){
       $scope.tickets=data;
     });
   };
@@ -233,6 +261,14 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     }
   };
 
+  $scope.update=function(){
+    if($scope.search_data==""){
+      $scope.initPagedList();
+    } else {
+      updateSearch();
+    }
+  };
+
   $scope.getPages = function(){
     return new Array($scope.cantidadPaginas);
   };
@@ -246,7 +282,26 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
         aux = ((data / $scope.cantidadPorPagina)|0);
         aux < (data/$scope.cantidadPorPagina) ? $scope.cantidadPaginas = (aux+1) : $scope.cantidadPaginas=aux;
       });
-      ticketFactory.searchTickets($scope.search_data,1,$scope.cantidadPorPagina,function(data){
+      var estados = [];
+      if($scope.recibido){
+        estados.push(0);
+      }
+      if($scope.presupuestado){
+        estados.push(1);
+      }
+      if($scope.encurso){
+        estados.push(2);
+      }
+      if($scope.reparado){
+        estados.push(3);
+      }
+      if($scope.entregado){
+        estados.push(4);
+      }
+      if($scope.cancelado){
+        estados.push(5);
+      }
+      ticketFactory.searchTickets($scope.search_data,1,$scope.cantidadPorPagina,estados,function(data){
         $scope.paginaActual=1;
         $scope.tickets=data;
 

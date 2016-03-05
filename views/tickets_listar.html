@@ -4,6 +4,26 @@
         <h1 class="page-header">Listado de Tickets</h1>
     </div>
   </div>
+
+<div class="checkbox-inline">
+ <label><input type="checkbox" ng-model="recibido" ng-click=update()>{{estados[0].text}}</label>
+</div>
+<div class="checkbox-inline">
+ <label><input type="checkbox" ng-model="presupuestado" ng-click=update()>{{estados[1].text}}</label>
+</div>
+<div class="checkbox-inline">
+ <label><input type="checkbox" ng-model="encurso" ng-click=update()>{{estados[2].text}}</label>
+</div>
+<div class="checkbox-inline">
+ <label><input type="checkbox" ng-model="reparado" ng-click=update()>{{estados[3].text}}</label>
+</div>
+<div class="checkbox-inline">
+ <label><input type="checkbox" ng-model="entregado" ng-click=update()>{{estados[4].text}}</label>
+</div>
+<div class="checkbox-inline">
+ <label><input type="checkbox" ng-model="cancelado" ng-click=update()>{{estados[5].text}}</label>
+</div>
+
   <div class="row">
     <div class="col-lg-12">
       <div class="input-group">
