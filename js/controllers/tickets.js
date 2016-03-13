@@ -111,6 +111,18 @@ app.controller('TicketsController',function($scope,$rootScope,$timeout,$location
     });
   };
 
+  $scope.addTicketPorAccesorio = function(){
+    $scope.newTicket.cliente = $scope.clienteForTicket.id;
+    ticketFactory.addTicketPorAccesorio($scope.newTicket,function(data){
+      $scope.newTicket = {};
+      $location.path('/tickets/agregar');
+      $rootScope.addNotification($rootScope.notifications.SUCCESS,"Ticket agregado con exito.",5000);
+    },function(data){
+      $rootScope.addNotification($rootScope.notifications.ERROR,data.error.message,5000);
+    });
+  };
+
+
   $scope.saveTicket = function(){
     $scope.newTicket.cliente = $scope.clienteForTicket.id;
     ticketFactory.saveTicket($scope.newTicket,function(data){

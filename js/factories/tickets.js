@@ -29,6 +29,14 @@ app.factory('ticketFactory',[ '$http', '$rootScope', function($http,$rootScope){
     });
   };
 
+  ticketFactory.addTicketPorAccesorio = function(ticket,success,error){
+    $http.post($rootScope.serverUrl+"/ticket","json="+JSON.stringify(ticket)).success(function(data){
+      success(data);
+    }).error(function(data){
+      error(data);
+    });
+  };
+
   ticketFactory.get_Ticket = function(ticket, callback){
     $http.get($rootScope.serverUrl + "/ticket/ticket/"+ticket).success(function(data){
       callback(data);
